@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
     'users.apps.UsersConfig',
+    'order.apps.OrderConfig',
 ]
 
 MIDDLEWARE = [
