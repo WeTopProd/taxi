@@ -1,0 +1,61 @@
+[class*="ymaps-2"][class*="-ground-pane"] {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+/* #map {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
+/*   -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+/*} */
+.container {
+  width: 600px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#map,
+.map {
+  width: 100%;
+  height: 480px;
+  padding: 0;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+}
+
+.legend_item {
+  width: 80px;
+  height: 30px;
+  font-size: 16px;
+  line-height: 30px;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.legend_item_250 {
+  background-color: rgb(252, 228, 153);
+}
+
+.legend_item_350 {
+  background-color: rgb(153, 211, 142);
+}
+
+.legend_item_500 {
+  background-color: rgb(136, 178, 218);
+}
+
+.legend_item_750 {
+  background-color: rgb(248, 182, 230);
+}
+
+.legend_item_1000 {
+  background-color: rgb(242, 159, 157);
+}
