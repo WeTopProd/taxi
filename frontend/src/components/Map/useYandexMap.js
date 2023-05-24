@@ -9,7 +9,7 @@ export const useYandexMap = () => {
 
     if (yandexMapInitailized === true) {
       return;
-    }
+    };
 
     yandexMapInitailized = true;
 

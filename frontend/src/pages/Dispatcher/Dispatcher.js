@@ -2,6 +2,8 @@ import styles from './Dispatcher.module.scss';
 import Header from './Header/Header';
 import Car from './Car/Car';
 import Map from '../../components/Map/Map';
+import {useEffect} from 'react';
+import changeMeta from '../../services/changeMeta';
 
 const CARS = [
   {
@@ -30,7 +32,13 @@ const CARS = [
   },
 ];
 
+const PAGE_TITLE = 'Диспетчер - "БКФ Такси"';
+const PAGE_FAVICON = '/favicon_dispatcher.ico';
+
 function Dispatcher() {
+
+  useEffect(() => changeMeta(PAGE_TITLE, PAGE_FAVICON), []);
+
   return (
     <div className={styles.container}>
       <Header />
