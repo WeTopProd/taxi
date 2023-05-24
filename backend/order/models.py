@@ -11,6 +11,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+        ordering = ['-date_time']
 
     def __str__(self):
         return self.phone
