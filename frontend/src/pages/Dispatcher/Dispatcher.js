@@ -1,7 +1,7 @@
 import styles from './Dispatcher.module.scss';
-import Header from '../components/Dispatcher/Header/Header';
-import Car from '../components/Dispatcher/Car/Car';
-import Map from '../components/Dispatcher/Map/Map';
+import Header from './Header/Header';
+import Car from './Car/Car';
+import Map from '../../components/Map/Map';
 
 const CARS = [
   {
@@ -28,7 +28,7 @@ const CARS = [
     number: 'x111xx777',
     status: 'свободен'
   },
-]
+];
 
 function Dispatcher() {
   return (

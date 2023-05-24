@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from "./AddCar.module.scss";
 import cx from 'classnames';
+import {useOnClickOutside} from '../../../services/hooks';
 
 const AddCar = () => {
   const [isOpenAddCar, setIsOpenAddCar] = useState(false);
@@ -9,27 +10,7 @@ const AddCar = () => {
 
   const onClickAddCarHandler = () => {
     setIsOpenAddCar(!isOpenAddCar);
-  }
-
-// Hook
-function useOnClickOutside(refPopup, refBtn, handler) {
-  useEffect(() => {
-      const listener = (event) => {
-        // Do nothing if clicking ref's element or descendent elements
-        if (!refPopup.current || refPopup.current.contains(event.target) || event.target === refBtn.current) {
-          return;
-        }
-        handler(event);
-      };
-      document.addEventListener("mousedown", listener);
-      document.addEventListener("touchstart", listener);
-      return () => {
-        document.removeEventListener("mousedown", listener);
-        document.removeEventListener("touchstart", listener);
-      };
-    },
-    [refPopup, refBtn, handler]);
-}
+  };
 
   // Call hook passing in the ref and a function to call on outside click
   useOnClickOutside(addCarRef, btnRef, () => setIsOpenAddCar(false));

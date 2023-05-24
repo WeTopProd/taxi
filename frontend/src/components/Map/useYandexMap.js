@@ -56,25 +56,24 @@ export const useYandexMap = () => {
       });
 
 // Создаем кнопку, с помощью которой пользователи смогут получить начальную и конечную точки маршрута.
-//       const getPointsButton = new ymaps.control.Button({
-//         data: {
-//           content: "Получить значения",
-//           title: "Получить пункты маршрута"
-//         },
-//         options: {
-//           selectOnClick: false,
-//           maxWidth: 190
-//         }
-//       });
-//       // Объявляем обработчик для кнопки.
-//       getPointsButton.events.add('click', function() {
-//         $("#input1").val(control.routePanel.state.get('from'));
-//         $("#input2").val(control.routePanel.state.get('to'));
-//
-//       });
-//
-//
-//       myMap.controls.add(getPointsButton);
+      const getPointsButton = new ymaps.control.Button({
+        data: {
+          content: "Получить адрес",
+          title: "Получить адрес в заказ"
+        },
+        options: {
+          selectOnClick: false,
+          maxWidth: 190
+        }
+      });
+
+      // Объявляем обработчик для кнопки.
+      getPointsButton.events.add('click', function() {
+        // $("#input1").val(control.routePanel.state.get('from'));
+        // $("#address").val(control.routePanel.state.get('to'));
+      });
+
+      myMap.controls.add(getPointsButton);
 
       let myPolygon = new ymaps.Polygon(
         [
@@ -83,7 +82,6 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_250,
         ],
         {
-
           hintContent: "250 руб.",
         },
         {

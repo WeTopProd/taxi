@@ -6,6 +6,7 @@ import AddCar from '../AddCar/AddCar';
 import Orders from '../Orders/Orders';
 
 const Header = () => {
+
   return (
     <header className={styles.header}>
       <img className={styles.logo} src={mainLogo} />

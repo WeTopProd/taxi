@@ -1,7 +1,7 @@
 import styles from './Driver.module.scss';
-import Header from '../components/Driver/Header/Header';
-import DriverStatus from '../components/Driver/DriverStatus/DriverStatus';
-import DriverPopup from '../components/Driver/DriverPopup/DriverPopup';
+import Header from './Header/Header';
+import DriverStatus from './DriverStatus/DriverStatus';
+import DriverPopup from './DriverPopup/DriverPopup';
 
 
 const ORDER = {
