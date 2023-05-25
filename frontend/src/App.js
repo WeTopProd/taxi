@@ -18,7 +18,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/"  element={<Main />}/>
-        <Route path="dispatcher"  element={<Dispatcher />}/>
+        <Route path="dispatcher" element={<Dispatcher />}/>
         <Route path="barmen" element={<Barmen />}/>
         <Route path="driver" element={<Driver />}/>
       </Routes>

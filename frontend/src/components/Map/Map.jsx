@@ -4,6 +4,7 @@ import {useYandexMap} from './useYandexMap';
 import cx from 'classnames';
 
 const Map = () => {
+
   useYandexMap();
 
   return (

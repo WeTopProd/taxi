@@ -8,14 +8,24 @@ import {fetchOrders} from '../../../services/api';
 
 const Orders = () => {
   const [isOpenOrders, setIsOpenOrders] = useState(false);
+  const [page, setPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(null);
+  const [nextPage, setNextPage] = useState(null);
 
-  const {data: orders = [], isLoading, error, isSuccess} = useQuery({
-    queryFn: () => fetchOrders().then((data) => data.data.reverse()),
-    queryKey: ['orders'],
-    refetchInterval: 1000,
+  const {data: orders = [], isLoading} = useQuery({
+    queryFn: () => fetchOrders(page)
+      .then((data) => {
+        setPrevPage(data?.data.previous);
+        setNextPage(data?.data.next);
+        return data?.data.results
+      }),
+    queryKey: ["orders", page],
+    refetchInterval: 3000,
     retry: 5,
     onError: (error) => {alert(error)}
   });
+
+  console.log(nextPage);
 
   const ordersRef = useRef(null);
   const btnRef = useRef(null);
@@ -47,7 +57,9 @@ const Orders = () => {
               <table>
                 <tbody>
                 {
-                  isLoading ? (<h2>Данные загружаются</h2>) :
+                  isLoading ? (
+                    <tr><td>Данные загружаются</td></tr>
+                    ) :
                     orders.map((orderItem, index) =>
                     <tr key={index}>
                       <td className={styles.orders_id}>{orderItem.id}</td>
@@ -56,6 +68,12 @@ const Orders = () => {
                       <td className={styles.orders_status}>{orderItem.status}</td>
                     </tr>
                   )}
+                   <tr>
+                     <td className={styles.btns} colSpan={4}>
+                       <button onClick={() => setPage(page-1)} disabled={!prevPage}>Предыдущая страница</button>
+                       <button onClick={() => setPage(page+1)} disabled={!nextPage}>Следующая страница</button>
+                     </td>
+                    </tr>
                 </tbody>
               </table>
             </div>

@@ -39,6 +39,7 @@ function Dispatcher() {
 
   useEffect(() => changeMeta(PAGE_TITLE, PAGE_FAVICON), []);
 
+
   return (
     <div className={styles.container}>
       <Header />

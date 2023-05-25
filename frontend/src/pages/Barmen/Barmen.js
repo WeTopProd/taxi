@@ -2,12 +2,14 @@ import styles from './Barmen.module.scss';
 import Header from './Header/Header';
 import Form from './Form/Form';
 import Map from '../../components/Map/Map';
-import {useEffect} from 'react';
+import {createContext, useContext, useEffect, useState} from 'react';
 import changeMeta from '../../services/changeMeta';
+import {BarmenProvider} from './BarmenContext';
 
 
 const PAGE_TITLE = 'Бармен - "БКФ Такси"';
 const PAGE_FAVICON = '/favicon_barmen.ico';
+
 
 function Barmen() {
 
@@ -15,15 +17,17 @@ function Barmen() {
 
   return (
     <div className={styles.container_barmen}>
-      <Header />
-      <main className={styles.main}>
-        <div className={styles.form}>
-          <Form />
-        </div>
-        <div className={styles.map}>
-          <Map />
-        </div>
-      </main>
+      <BarmenProvider>
+        <Header />
+        <main className={styles.main}>
+          <div className={styles.form}>
+            <Form />
+          </div>
+          <div className={styles.map}>
+            <Map />
+          </div>
+        </main>
+      </BarmenProvider>
     </div>
   );
 }

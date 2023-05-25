@@ -1,17 +1,23 @@
 /* eslint-disable no-undef */
 import React, {useEffect} from 'react';
 import * as POLYGONS from './polygons.js';
+import {logDOM} from '@testing-library/react';
+import {useBarmenContext} from '../../pages/Barmen/BarmenContext';
 
 let yandexMapInitailized = false;
 
 export const useYandexMap = () => {
+
+  const {setAddress} = useBarmenContext();
+
   useEffect(() => {
 
     if (yandexMapInitailized === true) {
-      return;
-    };
+      return
+    }
 
     yandexMapInitailized = true;
+
 
     ymaps.ready(init);
 
@@ -70,7 +76,10 @@ export const useYandexMap = () => {
       // Объявляем обработчик для кнопки.
       getPointsButton.events.add('click', function() {
         // $("#input1").val(control.routePanel.state.get('from'));
+
         // $("#address").val(control.routePanel.state.get('to'));
+        setAddress(control.routePanel.state.get('to'));
+        // console.log();
       });
 
       myMap.controls.add(getPointsButton);

@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from "./Form.module.scss";
 import cx from 'classnames';
 import axios from 'axios';
 import {URL} from '../../../services/api';
+import {useBarmenContext} from '../BarmenContext';
 
 
 const Form = () => {
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
+  const {address, setAddress} = useBarmenContext();
 
   const clearForm = () => {
     setName('');

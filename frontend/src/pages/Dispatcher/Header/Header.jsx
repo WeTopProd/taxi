@@ -11,7 +11,7 @@ const Header = () => {
     <header className={styles.header}>
       <img className={styles.logo} src={mainLogo} />
       <div className={styles.btns}>
-        <AddCar />
+        {/*<AddCar />*/}
         <Orders />
         <Notice />
       </div>
