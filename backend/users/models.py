@@ -1,24 +1,48 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
+
+from .managers import UserManager
+from .validators import validate_phone_number
 
 
-class CustomUser(AbstractUser):
-    email = models.EmailField(
-        db_index=True,
-        max_length=254,
-        unique=True,
-        verbose_name='Почта'
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    STATUS_DRIVER = (
+        ('free', 'Свободен'),
+        ('busy', 'Занят'),
     )
+    car_number = models.CharField(
+        verbose_name='Гос. номер машины',
+        max_length=10,
+        unique=True
+    )
+    first_name = models.CharField(max_length=150)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    phone = PhoneNumberField(
+        verbose_name='Телефон',
+        unique=True,
+        validators=[validate_phone_number]
+    )
+    status = models.CharField(
+        max_length=30,
+        choices=STATUS_DRIVER,
+        default='busy'
+    )
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    objects = UserManager()
+    USERNAME_FIELD = 'phone'
 
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = 'Водитель'
+        verbose_name_plural = 'Водители'
+        ordering = ('status',)
 
     def __str__(self):
-        return self.username
+        return self.first_name
 
 
-User = CustomUser
+
+Driver = CustomUser
