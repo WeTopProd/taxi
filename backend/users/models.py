@@ -2,9 +2,13 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import RegexValidator
 
 from .managers import UserManager
 from .validators import validate_phone_number
+
+RU_NUMBER = (r'^[АВЕКМНОРСТУХABEKMHOPCTYX]'
+             r'{1}\d{3}[АВЕКМНОРСТУХABEKMHOPCTYX]{2}\d{2,3}$')
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -13,9 +17,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('busy', 'Занят'),
     )
     car_number = models.CharField(
+        max_length=15,
         verbose_name='Гос. номер машины',
-        max_length=10,
-        unique=True
+        validators=[
+            RegexValidator(
+                regex=RU_NUMBER,
+                message='Введите правильный гос. номер машины',
+                code='invalid_license_plate'
+            )
+        ]
     )
     first_name = models.CharField(max_length=150)
 
@@ -42,7 +52,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.first_name
-
 
 
 Driver = CustomUser
