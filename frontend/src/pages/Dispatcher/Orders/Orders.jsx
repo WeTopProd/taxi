@@ -37,9 +37,11 @@ const Orders = () => {
   }
 
   const onClickOrdersHandler = () => {
+    if (isOpenOrders) {
+      fetchOrderList();
+    }
     setIsOpenOrders(!isOpenOrders);
     setPage(1);
-    fetchOrderList();
   };
 
   useEffect(() => {
