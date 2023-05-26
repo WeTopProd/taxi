@@ -4,6 +4,7 @@ import Car from './Car/Car';
 import Map from '../../components/Map/Map';
 import {useEffect} from 'react';
 import changeMeta from '../../services/changeMeta';
+import OrdersNew from './OrdersNew/OrdersNew';
 
 const CARS = [
   {
@@ -51,7 +52,7 @@ function Dispatcher() {
             })
           }
         </div>
-        <Map />
+        <OrdersNew />
       </main>
     </div>
   );

@@ -12,8 +12,8 @@ const Car = ({number, status}) => {
       <div className={styles.image}>
         <img
           src={status==='свободен' ? carFreeIMG : carBusyIMG}
-          // width="169"
-          // height="128"
+          width="85"
+          height="64"
           alt="такси"
         />
       </div>
