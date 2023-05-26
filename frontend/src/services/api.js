@@ -1,11 +1,29 @@
 import axios from 'axios';
+import {useQuery} from '@tanstack/react-query';
 
-const URL = 'http://127.0.0.1:8000/api/order/?page=';
+const BASE_URL = 'http://127.0.0.1:8000/api/order';
 
-async function fetchOrders (page = 1) {
-  console.log('запрос');
-  return await axios.get(URL + page);
+export async function fetchOrders (page = 1) {
+  return await axios.get(BASE_URL, {
+    params: {
+      page: page,
+    }
+  });
 }
 
+export async function submitOrder (data) {
+  return await axios.post(BASE_URL, data);
+}
 
-export {URL, fetchOrders};
+// export const {data: orders = [], isLoading} = useQuery({
+//   queryFn: () => fetchOrders()
+//     .then((data) => {
+//       setPrevPage(data?.data.previous);
+//       setNextPage(data?.data.next);
+//       return data?.data.results
+//     }),
+//   queryKey: ["orders"],
+//   refetchInterval: 3000,
+//   retry: 5,
+//   onError: (error) => {alert(error)}
+// });

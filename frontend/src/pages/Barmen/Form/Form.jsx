@@ -1,8 +1,7 @@
 import React, {useContext, useState} from 'react';
 import styles from "./Form.module.scss";
 import cx from 'classnames';
-import axios from 'axios';
-import {URL} from '../../../services/api';
+import {submitOrder} from '../../../services/api';
 import {useBarmenContext} from '../BarmenContext';
 
 
@@ -18,13 +17,15 @@ const Form = () => {
     setAddress('');
   }
 
+
+
   const sendRequest = (data) => {
-    axios.post(URL, data)
+    submitOrder(data)
       .then(function (response) {
         alert('Заказ отправлен');
         clearForm();
       })
-      .catch(function (error) {
+      .catch((error) => {
         alert(error);
       });
   }

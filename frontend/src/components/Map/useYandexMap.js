@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React, {useEffect} from 'react';
 import * as POLYGONS from './polygons.js';
-import {logDOM} from '@testing-library/react';
 import {useBarmenContext} from '../../pages/Barmen/BarmenContext';
 
 let yandexMapInitailized = false;
@@ -65,7 +64,7 @@ export const useYandexMap = () => {
       const getPointsButton = new ymaps.control.Button({
         data: {
           content: "Получить адрес",
-          title: "Получить адрес в заказ"
+          title: "Получить адрес"
         },
         options: {
           selectOnClick: false,

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from "./Orders.module.scss";
 import cx from "classnames";
 import {useQuery} from '@tanstack/react-query';
@@ -8,24 +8,11 @@ import {fetchOrders} from '../../../services/api';
 
 const Orders = () => {
   const [isOpenOrders, setIsOpenOrders] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [prevPage, setPrevPage] = useState(null);
   const [nextPage, setNextPage] = useState(null);
-
-  const {data: orders = [], isLoading} = useQuery({
-    queryFn: () => fetchOrders(page)
-      .then((data) => {
-        setPrevPage(data?.data.previous);
-        setNextPage(data?.data.next);
-        return data?.data.results
-      }),
-    queryKey: ["orders", page],
-    refetchInterval: 3000,
-    retry: 5,
-    onError: (error) => {alert(error)}
-  });
-
-  console.log(nextPage);
+  const [orders, setOrders] = useState([]);
 
   const ordersRef = useRef(null);
   const btnRef = useRef(null);
@@ -33,9 +20,32 @@ const Orders = () => {
   // Call hook passing in the ref and a function to call on outside click
   useOnClickOutside(ordersRef, btnRef, () => setIsOpenOrders(false));
 
+  const fetchOrderList = (page) => {
+    setIsLoading(true);
+
+    fetchOrders(page)
+      .then((data) => {
+        setPrevPage(data?.data.previous);
+        setNextPage(data?.data.next);
+        setOrders(data?.data.results);
+        console.log(isLoading);
+      })
+      .then(() => setIsLoading(false))
+      .catch((error) => {
+        alert(error);
+      })
+  }
+
   const onClickOrdersHandler = () => {
     setIsOpenOrders(!isOpenOrders);
+    setPage(1);
+    fetchOrderList();
   };
+
+  useEffect(() => {
+    fetchOrderList(page);
+  }, [page])
+
 
   return (
     <>

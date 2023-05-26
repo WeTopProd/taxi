@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react'
 
 
 const initialValue = {
-  address: 'Москва',
+  address: '',
   setAddress: () => undefined
 }
 
