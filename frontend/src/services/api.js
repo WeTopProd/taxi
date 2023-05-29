@@ -15,13 +15,13 @@ export async function submitOrder (data) {
   return await axios.post(BASE_URL, data);
 }
 
-export const QueryNewOrders = () => useQuery({
+export const QueryNewOrders = (time) => useQuery({
   queryFn: () => fetchOrders()
     .then((data) => {
       return data?.data.results
     }),
   queryKey: ["newOrders"],
-  refetchInterval: 3000,
+  refetchInterval: time,
   retry: 5,
   onError: (error) => {alert(error)}
 });
