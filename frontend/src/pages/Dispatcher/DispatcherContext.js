@@ -3,7 +3,7 @@ import {QueryNewOrders} from '../../services/api';
 
 
 const initialValue = {
-  newOrders: '',
+  newOrders: [],
   isLoading: true
 }
 
@@ -11,7 +11,7 @@ const Context = createContext(initialValue)
 
 export const DispatcherProvider = ({ children }) => {
 
-  const {data: newOrders = [], isLoading} = QueryNewOrders ();
+  const {data: newOrders = [], isLoading = true} = QueryNewOrders (3000);
 
   return (
     <Context.Provider value={{ newOrders, isLoading }}>{children}</Context.Provider>

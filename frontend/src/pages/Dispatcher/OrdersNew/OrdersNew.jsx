@@ -1,34 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import styles from "./OrdersNew.module.scss";
-import cx from "classnames";
-import {useQuery} from '@tanstack/react-query';
-import {useOnClickOutside} from '../../../services/hooks';
-import {fetchOrders} from '../../../services/api';
+import {useDispatcherContext} from '../DispatcherContext';
 
 
 const OrdersNew = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [orders, setOrders] = useState([]);
 
-
-  const fetchOrderList = () => {
-    setIsLoading(true);
-
-    fetchOrders()
-      .then((data) => {
-        setOrders(data?.data.results);
-        console.log(isLoading);
-      })
-      .then(() => setIsLoading(false))
-      .catch((error) => {
-        alert(error);
-      })
-  }
-
-  useEffect(() => {
-    fetchOrderList();
-  }, [])
-
+  const {newOrders, isLoading} = useDispatcherContext();
 
   return (
       <>

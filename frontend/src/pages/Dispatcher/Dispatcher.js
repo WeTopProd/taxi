@@ -5,6 +5,7 @@ import Map from '../../components/Map/Map';
 import {useEffect} from 'react';
 import changeMeta from '../../services/changeMeta';
 import OrdersNew from './OrdersNew/OrdersNew';
+import {DispatcherProvider, useDispatcherContext} from './DispatcherContext';
 
 const CARS = [
   {
@@ -42,19 +43,22 @@ function Dispatcher() {
 
 
   return (
-    <div className={styles.container}>
-      <Header />
-      <main className={styles.main}>
-        <div className={styles.cars}>
-          {
-            CARS.map((car, index) => {
-              return <Car key={index} number={car.number} status={car.status} />
-            })
-          }
-        </div>
-        <OrdersNew />
-      </main>
-    </div>
+    <DispatcherProvider>
+      <div className={styles.container}>
+        <Header />
+        <main className={styles.main}>
+          <div className={styles.cars}>
+            {
+              CARS.map((car, index) => {
+                return <Car key={index} number={car.number} status={car.status} />
+              })
+            }
+          </div>
+          <OrdersNew />
+        </main>
+      </div>
+    </DispatcherProvider>
+
   );
 }
 
