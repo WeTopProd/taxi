@@ -14,4 +14,5 @@ class OrderSerializer(serializers.ModelSerializer):
             'address',
             'date_time',
             'status',
+            'driver'
         )
