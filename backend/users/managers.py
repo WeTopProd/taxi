@@ -21,18 +21,11 @@ class UserManager(BaseUserManager):
         return self._create_user(phone, car_number, password,
                                  **extra_fields)
 
-    def create_superuser(self, phone, car_number, first_name=None,
-                         last_name=None,
-                         password=None, **kwargs):
-        user = self.create_user(
-            phone,
-            car_number,
-            first_name=first_name,
-            last_name=last_name,
-            password=password,
-            is_staff=True,
-            is_active=True,
-            is_superuser=True,
-            **kwargs
-        )
-        return user
+    def create_superuser(
+            self, phone,
+            car_number='A666AA777', password=None, **extra_fields
+    ):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self._create_user(phone, car_number, password,
+                                 **extra_fields)
