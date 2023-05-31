@@ -2,9 +2,9 @@ import React from 'react';
 import styles from "./Header.module.scss";
 import CarNumber from '../../pages/Driver/CarNumber/CarNumber';
 import mainLogo from "../../assets/img/logo-franc.png";
-import {logoutQuery} from '../../services/api';
 import {routes} from '../../helpers/routes';
 import {useNavigate} from 'react-router-dom';
+import {logoutQuery} from '../../services/authService';
 
 
 const Header = ({isAuth = false}) => {

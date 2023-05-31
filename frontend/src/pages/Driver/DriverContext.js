@@ -1,5 +1,7 @@
 import React, {createContext, useContext, useState} from 'react';
-import {QueryCars, QueryNewOrders, useQueryCars} from '../../services/api';
+import {useQueryCars} from '../../services/api';
+import {QueryNewOrders} from '../../services/orderService';
+import {QueryCars} from '../../services/userService';
 
 
 const initialValue = {

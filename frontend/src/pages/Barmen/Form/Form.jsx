@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react';
 import styles from "./Form.module.scss";
 import cx from 'classnames';
-import {submitOrder} from '../../../services/api';
 import {useBarmenContext} from '../BarmenContext';
+import {submitOrder} from '../../../services/orderService';
 
 const Form = () => {
 

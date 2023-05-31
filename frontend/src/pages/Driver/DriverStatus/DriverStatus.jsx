@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from "./DriverStatus.module.scss";
 import cx from "classnames"
 import {useDriverContext} from '../DriverContext';
-import {changeDriverDataQuery} from '../../../services/api';
+import {changeDriverDataQuery} from '../../../services/userService';
 
 
 const DriverStatus = () => {

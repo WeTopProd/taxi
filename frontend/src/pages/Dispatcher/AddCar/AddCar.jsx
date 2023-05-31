@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from "./AddCar.module.scss";
 import cx from 'classnames';
 import {useOnClickOutside} from '../../../helpers/hooks';
-import {submitAddCar} from '../../../services/api';
+import {submitAddCar} from '../../../services/userService';
 
 const AddCar = () => {
   const [isOpenAddCar, setIsOpenAddCar] = useState(false);

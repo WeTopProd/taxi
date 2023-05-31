@@ -5,8 +5,8 @@ import DriverPopup from './DriverPopup/DriverPopup';
 import {useEffect, useState} from 'react';
 import changeMeta from '../../helpers/changeMeta';
 import {DriverProvider, useDriverContext} from './DriverContext';
-import {getDriverInfoByToken} from '../../services/api';
 import {routes} from '../../helpers/routes';
+import {getDriverInfoByToken} from '../../services/userService';
 
 const ORDER = {
   id: '3',
