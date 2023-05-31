@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios'
-import {useDriverContext} from '../DriverContext';
 import styles from "./Login.module.scss";
 
 
@@ -8,14 +7,11 @@ function Login({setIsLogin}) {
 
   const [inputPhone, setInputPhone] = useState('');
   const [inputPassword, setInputPassword] = useState('');
-  const {userToken, setUserToken} = useDriverContext();
 
   const onSuccessLogin = (res) => {
     const authKey = res?.data?.auth_token;
     setIsLogin(true);
-    setUserToken(authKey);
 
-    localStorage.setItem('token', authKey);
 
     axios.get(`http://127.0.0.1:8000/api/users/me/`,
       {
@@ -26,7 +22,11 @@ function Login({setIsLogin}) {
       }
     )
       .then(res => {
-        console.log(res);
+        localStorage.setItem('token', authKey);
+        localStorage.setItem('car_id', res.data.id);
+        localStorage.setItem('driver_name', res.data.first_name);
+        localStorage.setItem('driver_phone', res.data.phone);
+        localStorage.setItem('car_number', res.data.car_number);
       } )
 
   }
@@ -52,7 +52,6 @@ function Login({setIsLogin}) {
       }
     )
       .then(res => {
-        console.log(res);
         res.request.status === 200 ? onSuccessLogin(res) : setIsLogin(false)
       } )
       .catch(err => console.log(err))

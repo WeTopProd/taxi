@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import styles from "./DriverStatus.module.scss";
 import cx from "classnames"
 import axios from 'axios';
-import {useDriverContext} from '../DriverContext';
+
 
 
 const DriverStatus = () => {
   const [driverStatus, setDriverStatus] = useState('занят');
+
 
 
 

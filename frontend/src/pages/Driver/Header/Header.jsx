@@ -19,7 +19,7 @@ const Header = ({isLogin, setIsLogin}) => {
         }
       }
     ).then(() => setIsLogin(false))
-      .then(() => {localStorage.removeItem('token')})
+      .then(() => {localStorage.clear()})
       .catch((err) => console.log(err))
   }
 
