@@ -1,10 +1,45 @@
 import React, {useState} from 'react';
 import styles from "./DriverStatus.module.scss";
 import cx from "classnames"
+import axios from 'axios';
+import {useDriverContext} from '../DriverContext';
 
 
 const DriverStatus = () => {
-  const [driverStatus, setDriverStatus] = useState('свободен');
+  const [driverStatus, setDriverStatus] = useState('занят');
+
+
+
+  const onClickStatusFree = () => {
+    setDriverStatus('свободен');
+    axios.patch(`http://127.0.0.1:8000/api/users/4/`,
+      {
+      status: 'free'
+    },
+      {
+        headers : {
+          'Content-Type': 'application/json',
+          'authorization': `Token ${localStorage.getItem('token')}`
+        }
+      }
+    )
+  }
+
+  const onClickStatusBusy = () => {
+    setDriverStatus('занят');
+    axios.patch(`http://127.0.0.1:8000/api/users/4/`,
+      {
+      status: 'busy'
+    },
+      {
+        headers : {
+          'Content-Type': 'application/json',
+          'authorization': `Token ${localStorage.getItem('token')}`
+        }
+      }
+    )
+  }
+
 
   return (
     <div>
@@ -16,14 +51,14 @@ const DriverStatus = () => {
         <div className={styles.change_status_btns}>
           <button
             className={styles.change_status_btn}
-            onClick={() => setDriverStatus('свободен')}
+            onClick={onClickStatusFree}
             disabled={driverStatus === 'свободен'}
           >
             Я свободен
           </button>
           <button
             className={cx(styles.change_status_btn, styles.change_status_btn_busy)}
-            onClick={() => setDriverStatus('занят')}
+            onClick={onClickStatusBusy}
             disabled={driverStatus === 'занят'}
           >
             Я занят

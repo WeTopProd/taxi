@@ -26,6 +26,7 @@ class UserSerializer(UserSerializer):
             'phone',
             'first_name',
             'car_number',
+            'status'
         )
 
 

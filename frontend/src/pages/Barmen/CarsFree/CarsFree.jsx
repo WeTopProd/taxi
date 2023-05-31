@@ -3,7 +3,6 @@ import styles from "./CarsFree.module.scss";
 import cx from 'classnames';
 import {declOfNum} from '../../../services/declOfNum';
 
-
 const CARS_DECL = [
   'свободная машина',
   'свободные машины',
@@ -12,7 +11,7 @@ const CARS_DECL = [
 
 const CarsFree = () => {
 
-  const [carsCount, setCarsCount] = useState(1);
+  const [carsCount, setCarsCount] = useState(0);
 
   return (
     <div className={styles.cars}>

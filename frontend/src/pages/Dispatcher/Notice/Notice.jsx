@@ -1,12 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./Notice.module.scss";
 import cx from "classnames";
+import {useDispatcherContext} from '../DispatcherContext';
 
 // notice - количество заказов со статусом ожидает
 
 
 const Notice = () => {
-  const [notice, setNotice] = useState(2);
+  const [notice, setNotice] = useState('');
+  const {newOrders} = useDispatcherContext();
+
+  useEffect(() => {
+    setNotice(newOrders.length);
+  }, [newOrders])
 
   return (
     <>

@@ -2,8 +2,10 @@ import styles from './Driver.module.scss';
 import Header from './Header/Header';
 import DriverStatus from './DriverStatus/DriverStatus';
 import DriverPopup from './DriverPopup/DriverPopup';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import changeMeta from '../../services/changeMeta';
+import {DriverProvider} from './DriverContext';
+import Login from './Login/Login';
 
 
 const ORDER = {
@@ -16,17 +18,27 @@ const PAGE_FAVICON = '/favicon_driver.ico';
 
 function Driver() {
 
-  const isOpenDriverPopUp = true;
   useEffect(() => changeMeta(PAGE_TITLE, PAGE_FAVICON), []);
 
+  const [isLogin, setIsLogin] = useState(false);
+
   return (
-    <div className={styles.container}>
-      <Header />
-      <main>
-        <DriverStatus />
-        {isOpenDriverPopUp && <DriverPopup address={ORDER.address} orderId={ORDER.id}/>}
-      </main>
-    </div>
+    <DriverProvider>
+      <div className={styles.container}>
+        <Header isLogin={isLogin} setIsLogin={setIsLogin} />
+        <main>
+          {
+            isLogin ?
+              <>
+                <DriverStatus />
+                <DriverPopup address={ORDER.address} orderId={ORDER.id}/>
+              </> :
+              <Login isLogin={isLogin} setIsLogin={setIsLogin} />
+          }
+        </main>
+      </div>
+    </DriverProvider>
+
   );
 }
 

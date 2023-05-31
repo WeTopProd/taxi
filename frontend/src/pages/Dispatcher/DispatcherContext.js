@@ -1,20 +1,24 @@
-import React, { createContext, useContext, useState } from 'react'
-import {QueryNewOrders} from '../../services/api';
+import React, { createContext, useContext } from 'react'
+import {QueryCars, QueryNewOrders, useQueryCars} from '../../services/api';
 
 
 const initialValue = {
   newOrders: [],
-  isLoading: true
+  isLoading: true,
+  carsList: [],
+  isLoadingCars: true
 }
 
 const Context = createContext(initialValue)
 
 export const DispatcherProvider = ({ children }) => {
 
-  const {data: newOrders = [], isLoading = true} = QueryNewOrders (3000);
+  const {data: newOrders = [], isLoading: isLoadingOrders = true} = QueryNewOrders (3000);
+
+  const {data: carsList = [], isLoading: isLoadingCars = true} = QueryCars(3000);
 
   return (
-    <Context.Provider value={{ newOrders, isLoading }}>{children}</Context.Provider>
+    <Context.Provider value={{ newOrders, isLoadingOrders, carsList, isLoadingCars }}>{children}</Context.Provider>
   )
 }
 
