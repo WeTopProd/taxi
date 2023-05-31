@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useQuery} from '@tanstack/react-query';
 import {getToken} from './localStorageService';
-import {routes} from './routes';
+import {routes} from '../helpers/routes';
 
 const HOST = 'http://127.0.0.1:8000/api'
 const BASE_URL_ORDERS = `${HOST}/orders/`;
@@ -40,6 +40,14 @@ export async function fetchOrders (page = 1) {
   return await axios.get(BASE_URL_ORDERS, {
     params: {
       page: page,
+    }
+  });
+}
+
+export async function fetchNewOrders (status = '') {
+  return await axios.get(BASE_URL_ORDERS, {
+    params: {
+      status: status
     }
   });
 }

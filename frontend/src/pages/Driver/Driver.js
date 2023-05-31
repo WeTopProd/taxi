@@ -3,10 +3,10 @@ import Header from '../../components/Header/Header';
 import DriverStatus from './DriverStatus/DriverStatus';
 import DriverPopup from './DriverPopup/DriverPopup';
 import {useEffect, useState} from 'react';
-import changeMeta from '../../services/changeMeta';
+import changeMeta from '../../helpers/changeMeta';
 import {DriverProvider, useDriverContext} from './DriverContext';
 import {getDriverInfoByToken} from '../../services/api';
-import {routes} from '../../services/routes';
+import {routes} from '../../helpers/routes';
 
 const ORDER = {
   id: '3',
@@ -37,10 +37,10 @@ function Driver() {
         setDriverName(res.data.first_name);
         setDriverPhone(res.data.phone);
       })
-      // .catch((err) => {
-      //   alert('Ошибка получения данных');
-      //   console.log(err);
-      // })
+      .catch((err) => {
+        alert('Ошибка получения данных');
+        console.log(err);
+      })
   },[]);
 
   return (

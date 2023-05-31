@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from "./CarsFree.module.scss";
 import cx from 'classnames';
-import {declOfNum} from '../../../services/declOfNum';
+import {declOfNum} from '../../../helpers/declOfNum';
 
 const CARS_DECL = [
   'свободная машина',

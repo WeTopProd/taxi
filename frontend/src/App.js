@@ -7,7 +7,7 @@ import './App.scss';
 import Dispatcher from './pages/Dispatcher/Dispatcher';
 import Barmen from './pages/Barmen/Barmen';
 import Main from './pages/Main/Main';
-import {routes} from './services/routes';
+import {routes} from './helpers/routes';
 import Login from './pages/Login/Login';
 import DriverContainer from './pages/Driver/Driver';
 

@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from "./Orders.module.scss";
 import cx from "classnames";
-import {useOnClickOutside} from '../../../services/hooks';
+import {useOnClickOutside} from '../../../helpers/hooks';
 import {fetchOrders} from '../../../services/api';
-import {ORDERS_NAMES} from '../../../services/orders_names';
+import {ORDERS_NAMES} from '../../../helpers/orders_names';
 
 
 const Orders = () => {

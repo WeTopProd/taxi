@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./OrdersNew.module.scss";
 import {useDispatcherContext} from '../DispatcherContext';
-import {ORDERS_NAMES} from '../../../services/orders_names';
+import {ORDERS_NAMES} from '../../../helpers/orders_names';
 
 
 const OrdersNew = () => {

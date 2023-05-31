@@ -3,7 +3,7 @@ import Header from './Header/Header';
 import Form from './Form/Form';
 import Map from '../../components/Map/Map';
 import {useEffect} from 'react';
-import changeMeta from '../../services/changeMeta';
+import changeMeta from '../../helpers/changeMeta';
 import {BarmenProvider} from './BarmenContext';
 
 

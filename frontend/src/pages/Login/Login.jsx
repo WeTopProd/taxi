@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './Login.module.scss';
 import {loginQuery} from '../../services/api';
 import {setToken} from '../../services/localStorageService';
-import {routes} from '../../services/routes';
+import {routes} from '../../helpers/routes';
 import {useNavigate} from 'react-router-dom';
 import Header from '../../components/Header/Header';
 

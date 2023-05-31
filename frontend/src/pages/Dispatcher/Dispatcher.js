@@ -2,7 +2,7 @@ import styles from './Dispatcher.module.scss';
 import Header from './Header/Header';
 import Car from './Car/Car';
 import {useEffect} from 'react';
-import changeMeta from '../../services/changeMeta';
+import changeMeta from '../../helpers/changeMeta';
 import OrdersNew from './OrdersNew/OrdersNew';
 import {DispatcherProvider, useDispatcherContext} from './DispatcherContext';
 import CarsList from './CarsList/CarsList';

@@ -13,7 +13,6 @@ const Context = createContext(initialValue)
 
 export const DriverProvider = ({ children }) => {
 
-  const [carToken, setCarToken] = useState('');
   const [carId, setCarId] = useState('');
   const [carNumber, setCarNumber] = useState('');
   const [driverName, setDriverName] = useState('');
@@ -29,8 +28,6 @@ export const DriverProvider = ({ children }) => {
       {
         newOrders,
         isLoadingOrders,
-        carToken,
-        setCarToken,
         carId,
         setCarId,
         carNumber,
