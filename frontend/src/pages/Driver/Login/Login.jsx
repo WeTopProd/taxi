@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
-import axios from 'axios'
 import styles from "./Login.module.scss";
 import {useDriverContext} from '../DriverContext';
+import {getDriverInfoByToken, loginQuery} from '../../../services/api';
+import {getToken, setToken} from '../../../services/localStorageService';
 
 
 function Login({setIsLogin}) {
@@ -19,46 +20,30 @@ function Login({setIsLogin}) {
 
   const  onSuccessLogin = (res) => {
     const token = res?.data?.auth_token;
-    localStorage.setItem('token', token);
+    setToken(token);
     setIsLogin(true);
 
-    axios.get(`http://127.0.0.1:8000/api/users/me/`,
-      {
-        headers : {
-          'Content-Type': 'application/json',
-          'authorization': `Token ${token}`
-        }
-      }
-    )
+    getDriverInfoByToken(token)
       .then(res => {
-        setCarId(res.data.id);
-        setDriverName(res.data.first_name);
-        setDriverPhone(res.data.phone);
-        setCarNumber(res.data.car_number);
-      })
+      setCarId(res.data.id);
+      setDriverName(res.data.first_name);
+      setDriverPhone(res.data.phone);
+      setCarNumber(res.data.car_number);
+    })
       .catch((err) => {alert('Не удалось получить данные водителя по токену', err)})
   }
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (getToken()) {
       setIsLogin(true);
+      getDriverInfoByToken();
     }
   }, [])
 
 
   const onSubmitLogin = (e) => {
     e.preventDefault()
-    axios.post(`http://localhost:8000/api/auth/token/login/`,
-      {
-        phone: inputPhone,
-        password: inputPassword
-      },
-      {
-        headers : {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
+    loginQuery(inputPhone,inputPassword)
       .then(res => {
         res.request.status === 200 ? onSuccessLogin(res) : setIsLogin(false)
       } )

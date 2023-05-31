@@ -1,44 +1,27 @@
 import React, {useState} from 'react';
 import styles from "./DriverStatus.module.scss";
 import cx from "classnames"
-import axios from 'axios';
 import {useDriverContext} from '../DriverContext';
+import {changeDriverDataQuery} from '../../../services/api';
+import {getToken} from '../../../services/localStorageService';
 
 
 const DriverStatus = () => {
   const [driverStatus, setDriverStatus] = useState('занят');
-  const token = localStorage.getItem('token');
+  const token = getToken();
 
   const {carId} = useDriverContext();
 
   const onClickStatusFree = () => {
     setDriverStatus('свободен');
-    axios.patch(`http://127.0.0.1:8000/api/users/${carId}/`,
-      {
-      status: 'free'
-    },
-      {
-        headers : {
-          'Content-Type': 'application/json',
-          'authorization': `Token ${token}`
-        }
-      }
-    )
+    changeDriverDataQuery(token, {status: 'free'}, carId)
+      .catch((err) => {alert(`не удалось изменить статус ${err}`)})
   }
 
   const onClickStatusBusy = () => {
     setDriverStatus('занят');
-    axios.patch(`http://127.0.0.1:8000/api/users/${carId}/`,
-      {
-      status: 'busy'
-    },
-      {
-        headers : {
-          'Content-Type': 'application/json',
-          'authorization': `Token ${token}`
-        }
-      }
-    )
+    changeDriverDataQuery(token, {status: 'busy'}, carId)
+      .catch((err) => {alert(`не удалось изменить статус ${err}`)})
   }
 
 

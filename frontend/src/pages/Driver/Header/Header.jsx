@@ -2,24 +2,18 @@ import React from 'react';
 import styles from "./Header.module.scss";
 import CarNumber from '../CarNumber/CarNumber';
 import mainLogo from "../../../assets/img/logo-franc.png";
+import {logoutQuery} from '../../../services/api';
+import {getToken} from '../../../services/localStorageService';
 
 
 const Header = ({isLogin, setIsLogin}) => {
 
  const onClickLogout = () => {
-    const token = localStorage.getItem('token')
+    const token = getToken('token')
 
-    return fetch(
-      'http://localhost:8000/api/auth/token/logout/',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': `Token ${token}`
-        }
-      }
-    ).then(() => setIsLogin(false))
+    return logoutQuery(token)
       .then(() => {localStorage.clear()})
+      .then(() => {setIsLogin(false)})
       .catch((err) => console.log(err))
   }
 
