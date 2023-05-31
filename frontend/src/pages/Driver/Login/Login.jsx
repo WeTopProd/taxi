@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios'
 import styles from "./Login.module.scss";
+import {useDriverContext} from '../DriverContext';
 
 
 function Login({setIsLogin}) {
@@ -8,27 +9,34 @@ function Login({setIsLogin}) {
   const [inputPhone, setInputPhone] = useState('');
   const [inputPassword, setInputPassword] = useState('');
 
-  const onSuccessLogin = (res) => {
-    const authKey = res?.data?.auth_token;
-    setIsLogin(true);
+  const {
+    setCarId,
+    setCarNumber,
+    setDriverName,
+    setDriverPhone
+  } = useDriverContext();
 
+
+  const  onSuccessLogin = (res) => {
+    const token = res?.data?.auth_token;
+    localStorage.setItem('token', token);
+    setIsLogin(true);
 
     axios.get(`http://127.0.0.1:8000/api/users/me/`,
       {
         headers : {
           'Content-Type': 'application/json',
-          'authorization': `Token ${authKey}`
+          'authorization': `Token ${token}`
         }
       }
     )
       .then(res => {
-        localStorage.setItem('token', authKey);
-        localStorage.setItem('car_id', res.data.id);
-        localStorage.setItem('driver_name', res.data.first_name);
-        localStorage.setItem('driver_phone', res.data.phone);
-        localStorage.setItem('car_number', res.data.car_number);
-      } )
-
+        setCarId(res.data.id);
+        setDriverName(res.data.first_name);
+        setDriverPhone(res.data.phone);
+        setCarNumber(res.data.car_number);
+      })
+      .catch((err) => {alert('Не удалось получить данные водителя по токену', err)})
   }
 
   useEffect(() => {
@@ -38,7 +46,7 @@ function Login({setIsLogin}) {
   }, [])
 
 
-  const Login = (e) => {
+  const onSubmitLogin = (e) => {
     e.preventDefault()
     axios.post(`http://localhost:8000/api/auth/token/login/`,
       {
@@ -62,7 +70,7 @@ function Login({setIsLogin}) {
 
     <section className={styles.login_wrapper}>
       <h2>Вход в личный кабинет</h2>
-      <form onSubmit={Login}>
+      <form onSubmit={onSubmitLogin}>
         <input
           type='text'
           onChange={(e) => setInputPhone(e.target.value)}
@@ -75,7 +83,7 @@ function Login({setIsLogin}) {
           onChange={event => setInputPassword(event.target.value)}
           placeholder="Пароль"
         />
-        <button onClick={Login} type={'submit'}>Войти</button>
+        <button type={'submit'}>Войти</button>
       </form>
     </section>
   )

@@ -13,13 +13,34 @@ const Context = createContext(initialValue)
 
 export const DriverProvider = ({ children }) => {
 
+  const [carToken, setCarToken] = useState('');
+  const [carId, setCarId] = useState('');
+  const [carNumber, setCarNumber] = useState('');
+  const [driverName, setDriverName] = useState('');
+  const [driverPhone, setDriverPhone] = useState('');
+
   const {data: newOrders = [], isLoading: isLoadingOrders = true} = QueryNewOrders(3000);
 
 
   // const {data: carsList = [], isLoading: isLoadingCars = true} = QueryCars(3000);
 
   return (
-    <Context.Provider value={{ newOrders, isLoadingOrders }}>{children}</Context.Provider>
+    <Context.Provider value={
+      {
+        newOrders,
+        isLoadingOrders,
+        carToken,
+        setCarToken,
+        carId,
+        setCarId,
+        carNumber,
+        setCarNumber,
+        driverName,
+        setDriverName,
+        driverPhone,
+        setDriverPhone
+      }
+    }>{children}</Context.Provider>
   )
 }
 

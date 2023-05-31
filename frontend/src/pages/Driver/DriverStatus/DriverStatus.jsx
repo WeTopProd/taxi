@@ -2,25 +2,25 @@ import React, {useState} from 'react';
 import styles from "./DriverStatus.module.scss";
 import cx from "classnames"
 import axios from 'axios';
-
+import {useDriverContext} from '../DriverContext';
 
 
 const DriverStatus = () => {
   const [driverStatus, setDriverStatus] = useState('занят');
+  const token = localStorage.getItem('token');
 
-
-
+  const {carId} = useDriverContext();
 
   const onClickStatusFree = () => {
     setDriverStatus('свободен');
-    axios.patch(`http://127.0.0.1:8000/api/users/4/`,
+    axios.patch(`http://127.0.0.1:8000/api/users/${carId}/`,
       {
       status: 'free'
     },
       {
         headers : {
           'Content-Type': 'application/json',
-          'authorization': `Token ${localStorage.getItem('token')}`
+          'authorization': `Token ${token}`
         }
       }
     )
@@ -28,14 +28,14 @@ const DriverStatus = () => {
 
   const onClickStatusBusy = () => {
     setDriverStatus('занят');
-    axios.patch(`http://127.0.0.1:8000/api/users/4/`,
+    axios.patch(`http://127.0.0.1:8000/api/users/${carId}/`,
       {
       status: 'busy'
     },
       {
         headers : {
           'Content-Type': 'application/json',
-          'authorization': `Token ${localStorage.getItem('token')}`
+          'authorization': `Token ${token}`
         }
       }
     )
