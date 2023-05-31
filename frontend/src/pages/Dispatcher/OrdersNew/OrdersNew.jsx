@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from "./OrdersNew.module.scss";
 import {useDispatcherContext} from '../DispatcherContext';
+import {ORDERS_NAMES} from '../../../services/orders_names';
 
 
 const OrdersNew = () => {
 
-  const {newOrders, isLoading} = useDispatcherContext();
+  const {newOrders, isLoadingOrders} = useDispatcherContext();
 
   return (
       <>
@@ -21,13 +22,13 @@ const OrdersNew = () => {
             </thead>
             <tbody>
               {
-                isLoading ? <tr><td>Данные загружаются</td></tr> :
-                  orders.map((orderItem, index) =>
+                isLoadingOrders ? <tr><td>Данные загружаются</td></tr> :
+                  newOrders.map((orderItem, index) =>
                     <tr key={index}>
                       <td className={styles.orders_id}>{orderItem.id}</td>
                       <td className={styles.orders_name}>{orderItem.name}</td>
                       <td className={styles.orders_phone}>{orderItem.phone}</td>
-                      <td className={styles.orders_status}>{orderItem.status}</td>
+                      <td className={styles.orders_status}>{ORDERS_NAMES[orderItem.status]}</td>
                     </tr>)
               }
             </tbody>

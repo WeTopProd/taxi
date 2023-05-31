@@ -4,7 +4,6 @@ import cx from 'classnames';
 import {submitOrder} from '../../../services/api';
 import {useBarmenContext} from '../BarmenContext';
 
-
 const Form = () => {
 
   const [name, setName] = useState('');
@@ -16,8 +15,6 @@ const Form = () => {
     setPhone('');
     setAddress('');
   }
-
-
 
   const sendRequest = (data) => {
     submitOrder(data)
