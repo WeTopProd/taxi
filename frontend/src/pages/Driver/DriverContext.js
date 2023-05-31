@@ -15,14 +15,11 @@ export const DriverProvider = ({ children }) => {
 
   const {data: newOrders = [], isLoading: isLoadingOrders = true} = QueryNewOrders(3000);
 
-  const [userToken, setUserToken] = useState('');
-
-
 
   // const {data: carsList = [], isLoading: isLoadingCars = true} = QueryCars(3000);
 
   return (
-    <Context.Provider value={{ newOrders, isLoadingOrders, userToken, setUserToken}}>{children}</Context.Provider>
+    <Context.Provider value={{ newOrders, isLoadingOrders }}>{children}</Context.Provider>
   )
 }
 
