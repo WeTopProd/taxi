@@ -9,6 +9,7 @@ class OrderFilter(FilterSet):
         super().__init__(*args, **kwargs)
         statuses = Order.objects.values_list('status', 'status').distinct()
         self.filters['status'].extra['choices'] = statuses
+
     status = MultipleChoiceFilter(
         lookup_expr='icontains',
         field_name='status'
