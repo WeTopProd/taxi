@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useQuery} from '@tanstack/react-query';
 import {getToken} from './localStorageService';
+import {routes} from './routes';
 
 const HOST = 'http://127.0.0.1:8000/api'
 const BASE_URL_ORDERS = `${HOST}/orders/`;
@@ -20,14 +21,13 @@ $api.interceptors.request.use((config) => {
   return config;
 });
 
-// $api.interceptors.response.use((response) => {
-//   if (response.data.error_text === 'Access deny') {
-//     alert('Нужно залогиниться. Вы сейчас будете перенаправлены на страницу авторизации');
-//     window.location.assign(routes.login);
-//   }
-//   return response;
-// });
-
+$api.interceptors.response.use((response) => {
+  if (response.data.error_text === 'Access deny') {
+    alert('Нужно залогиниться. Вы сейчас будете перенаправлены на страницу авторизации');
+    window.location.assign(routes.login);
+  }
+  return response;
+});
 
 
 

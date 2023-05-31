@@ -1,19 +1,25 @@
 import React from 'react';
 import styles from "./Header.module.scss";
-import CarNumber from '../CarNumber/CarNumber';
-import mainLogo from "../../../assets/img/logo-franc.png";
-import {logoutQuery} from '../../../services/api';
-import {getToken} from '../../../services/localStorageService';
+import CarNumber from '../../pages/Driver/CarNumber/CarNumber';
+import mainLogo from "../../assets/img/logo-franc.png";
+import {logoutQuery} from '../../services/api';
+import {getToken} from '../../services/localStorageService';
+import {routes} from '../../services/routes';
+import {useNavigate} from 'react-router-dom';
 
 
-const Header = ({isLogin, setIsLogin}) => {
+const Header = ({isAuth = false}) => {
+
+  const navigate = useNavigate();
 
  const onClickLogout = () => {
-    const token = getToken('token')
 
-    return logoutQuery(token)
-      .then(() => {localStorage.clear()})
-      .then(() => {setIsLogin(false)})
+    return logoutQuery()
+      .then(() => {
+        localStorage.clear();
+        navigate(routes.login);
+      })
+      .then(() => {})
       .catch((err) => console.log(err))
   }
 
@@ -23,7 +29,7 @@ const Header = ({isLogin, setIsLogin}) => {
       <img className={styles.logo} width={"112"} height={"33"} src={mainLogo} alt={'лого'}/>
       <div className={styles.btns}>
         {
-          isLogin ?
+          isAuth ?
             <>
               <CarNumber />
               <button onClick={onClickLogout} className={styles.btn_logout}>Выйти</button>
