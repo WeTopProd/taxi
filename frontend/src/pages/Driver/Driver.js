@@ -37,10 +37,10 @@ function Driver() {
         setDriverName(res.data.first_name);
         setDriverPhone(res.data.phone);
       })
-      .catch((err) => {
-        alert('Ошибка получения данных');
-        console.log(err);
-      })
+      // .catch((err) => {
+      //   alert('Ошибка получения данных');
+      //   console.log(err);
+      // })
   },[]);
 
   return (

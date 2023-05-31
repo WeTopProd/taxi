@@ -3,27 +3,24 @@ import styles from "./DriverStatus.module.scss";
 import cx from "classnames"
 import {useDriverContext} from '../DriverContext';
 import {changeDriverDataQuery} from '../../../services/api';
-import {getToken} from '../../../services/localStorageService';
 
 
 const DriverStatus = () => {
   const [driverStatus, setDriverStatus] = useState('занят');
-  const token = getToken();
 
   const {carId} = useDriverContext();
 
   const onClickStatusFree = () => {
     setDriverStatus('свободен');
-    changeDriverDataQuery(token, {status: 'free'}, carId)
+    changeDriverDataQuery({status: 'free'}, carId)
       .catch((err) => {alert(`не удалось изменить статус ${err}`)})
   }
 
   const onClickStatusBusy = () => {
     setDriverStatus('занят');
-    changeDriverDataQuery(token, {status: 'busy'}, carId)
+    changeDriverDataQuery({status: 'busy'}, carId)
       .catch((err) => {alert(`не удалось изменить статус ${err}`)})
   }
-
 
   return (
     <div>

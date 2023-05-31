@@ -6,10 +6,10 @@ import './App.scss';
 
 import Dispatcher from './pages/Dispatcher/Dispatcher';
 import Barmen from './pages/Barmen/Barmen';
-import Driver from './pages/Driver/Driver';
 import Main from './pages/Main/Main';
 import {routes} from './services/routes';
 import Login from './pages/Login/Login';
+import DriverContainer from './pages/Driver/Driver';
 
 
 const queryClient = new QueryClient();
@@ -24,7 +24,7 @@ function App() {
         <Route path={routes.login}  element={<Login />}/>
         <Route path="dispatcher" element={<Dispatcher />}/>
         <Route path="barmen" element={<Barmen />}/>
-        <Route path={routes.driver} element={<Driver />}/>
+        <Route path={routes.driver} element={<DriverContainer />}/>
       </Routes>
     </QueryClientProvider>
   );

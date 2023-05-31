@@ -21,14 +21,19 @@ $api.interceptors.request.use((config) => {
   return config;
 });
 
-$api.interceptors.response.use((response) => {
-  if (response.data.error_text === 'Access deny') {
-    alert('Нужно залогиниться. Вы сейчас будете перенаправлены на страницу авторизации');
-    window.location.assign(routes.login);
-  }
-  return response;
-});
 
+$api.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    if (error.response?.status === 401) {
+      alert('Нужно залогиниться. Вы сейчас будете перенаправлены на страницу авторизации');
+      window.location.assign(routes.login);
+    }
+    return Promise.reject(error);
+  }
+);
 
 
 export async function fetchOrders (page = 1) {
@@ -95,12 +100,8 @@ export function logoutQuery() {
   )
 }
 
-export function changeDriverDataQuery(token, data, carId) {
-  return $api.patch(BASE_URL_DRIVERS + `${carId}/`,
-    {
-      data
-    }
-  )
+export function changeDriverDataQuery(data, carId) {
+  return $api.patch(BASE_URL_DRIVERS + `${carId}/`, data)
 }
 
 

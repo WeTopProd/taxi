@@ -3,7 +3,6 @@ import styles from "./Header.module.scss";
 import CarNumber from '../../pages/Driver/CarNumber/CarNumber';
 import mainLogo from "../../assets/img/logo-franc.png";
 import {logoutQuery} from '../../services/api';
-import {getToken} from '../../services/localStorageService';
 import {routes} from '../../services/routes';
 import {useNavigate} from 'react-router-dom';
 
