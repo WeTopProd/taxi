@@ -40,14 +40,14 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/academy-backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/taxi-backend:latest
           context: backend
           file: backend/Dockerfile
       - name: Push to Docker Hub frontend
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/academy-frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/taxi-frontend:latest
           context: frontend
           file: frontend/Dockerfile
     deploy:
@@ -64,12 +64,13 @@ jobs:
             password: ${{ secrets.PASSPHRASE }}
             key: ${{ secrets.SSH_KEY }}
             script: |
-              cd academy/
+              cd taxi/
               sudo docker-compose down -v
-              sudo docker image rm ${{secrets.DOCKER_USERNAME }}/academy-backend
-              sudo docker image rm ${{secrets.DOCKER_USERNAME }}/academy-frontend
-              sudo docker pull ${{ secrets.DOCKER_USERNAME }}/academy-frontend:latest
-              sudo docker pull ${{ secrets.DOCKER_USERNAME }}/academy-backend:latest
+              sudo docker image rm ${{secrets.DOCKER_USERNAME }}/taxi-backend
+              sudo docker image rm ${{secrets.DOCKER_USERNAME }}/taxi-frontend
+              sudo docker image rm nginx_taxi
+              sudo docker pull ${{ secrets.DOCKER_USERNAME }}/taxi-frontend:latest
+              sudo docker pull ${{ secrets.DOCKER_USERNAME }}/taxi-backend:latest
               sudo docker-compose up -d
               sudo docker-compose exec -T backend python manage.py makemigrations
               sudo docker-compose exec -T backend python manage.py migrate --noinput

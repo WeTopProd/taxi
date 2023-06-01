@@ -16,4 +16,3 @@ class OrderSerializer(serializers.ModelSerializer):
             'status',
             'driver'
         )
-
