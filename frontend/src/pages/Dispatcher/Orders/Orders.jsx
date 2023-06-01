@@ -1,10 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
-import styles from "./Orders.module.scss";
-import cx from "classnames";
-import {useOnClickOutside} from '../../../helpers/hooks';
-import {ORDERS_NAMES} from '../../../helpers/orders_names';
-import {fetchOrders} from '../../../services/orderService';
-
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './Orders.module.scss';
+import cx from 'classnames';
+import { useOnClickOutside } from '../../../helpers/hooks';
+import { ORDERS_NAMES } from '../../../helpers/orders_names';
+import { fetchOrders } from '../../../services/orderService';
 
 const Orders = () => {
   const [isOpenOrders, setIsOpenOrders] = useState(false);
@@ -32,8 +31,8 @@ const Orders = () => {
       .then(() => setIsLoading(false))
       .catch((error) => {
         alert(error);
-      })
-  }
+      });
+  };
 
   const onClickOrdersHandler = () => {
     if (isOpenOrders) {
@@ -45,14 +44,18 @@ const Orders = () => {
 
   useEffect(() => {
     fetchOrderList(page);
-  }, [page])
-
+  }, [page]);
 
   return (
     <>
-      <button ref={btnRef} className={cx(styles.btn, isOpenOrders ? styles.active : '')} onClick={onClickOrdersHandler}>История заказов</button>
-      { isOpenOrders &&
-        (<div ref={ordersRef} className={styles.orders_popup}>
+      <button
+        ref={btnRef}
+        className={cx(styles.btn, isOpenOrders ? styles.active : '')}
+        onClick={onClickOrdersHandler}>
+        История заказов
+      </button>
+      {isOpenOrders && (
+        <div ref={ordersRef} className={styles.orders_popup}>
           <div className={styles.orders_list}>
             <table>
               <thead>
@@ -67,31 +70,46 @@ const Orders = () => {
             <div className={styles.orders_list_scroll}>
               <table>
                 <tbody>
-                {
-                  isLoading ? (
-                    <tr><td>Данные загружаются</td></tr>
-                    ) :
-                    orders.map((orderItem, index) =>
-                    <tr key={index}>
-                      <td className={styles.orders_id}>{orderItem.id}</td>
-                      <td className={styles.orders_name}>{orderItem.name}</td>
-                      <td className={styles.orders_phone}>{orderItem.phone}</td>
-                      <td className={styles.orders_status}>{ORDERS_NAMES[orderItem.status]}</td>
+                  {isLoading ? (
+                    <tr>
+                      <td>Данные загружаются</td>
                     </tr>
+                  ) : (
+                    orders.map((orderItem, index) => (
+                      <tr key={index}>
+                        <td className={styles.orders_id}>{orderItem.id}</td>
+                        <td className={styles.orders_name}>{orderItem.name}</td>
+                        <td className={styles.orders_phone}>
+                          {orderItem.phone}
+                        </td>
+                        <td className={styles.orders_status}>
+                          {ORDERS_NAMES[orderItem.status]}
+                        </td>
+                      </tr>
+                    ))
                   )}
-                   <tr>
-                     <td className={styles.btns} colSpan={4}>
-                       <button onClick={() => setPage(page-1)} disabled={!prevPage}>Предыдущая страница</button>
-                       <button onClick={() => setPage(page+1)} disabled={!nextPage}>Следующая страница</button>
-                     </td>
-                    </tr>
+                  <tr>
+                    <td className={styles.btns} colSpan={4}>
+                      <button
+                        onClick={() => setPage(page - 1)}
+                        disabled={!prevPage}>
+                        Предыдущая страница
+                      </button>
+                      <button
+                        onClick={() => setPage(page + 1)}
+                        disabled={!nextPage}>
+                        Следующая страница
+                      </button>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
-        </div>)}
+        </div>
+      )}
     </>
-  )
+  );
 };
 
 export default Orders;

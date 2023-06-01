@@ -2,16 +2,14 @@ import styles from './Barmen.module.scss';
 import Header from './Header/Header';
 import Form from './Form/Form';
 import Map from '../../components/Map/Map';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import changeMeta from '../../helpers/changeMeta';
-import {BarmenProvider} from './BarmenContext';
-
+import { BarmenProvider } from './BarmenContext';
 
 const PAGE_TITLE = 'Бармен - "БКФ Такси"';
 const PAGE_FAVICON = '/favicon_barmen.ico';
 
 function Barmen() {
-
   useEffect(() => changeMeta(PAGE_TITLE, PAGE_FAVICON), []);
 
   return (

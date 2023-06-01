@@ -1,44 +1,41 @@
 /* eslint-disable no-undef */
-import React, {useEffect} from 'react';
+import { useEffect } from 'react';
 import * as POLYGONS from './polygons.js';
-import {useBarmenContext} from '../../pages/Barmen/BarmenContext';
+import { useBarmenContext } from '../../pages/Barmen/BarmenContext';
 
 let yandexMapInitailized = false;
 
 export const useYandexMap = () => {
-
-  const {setAddress} = useBarmenContext();
+  const { setAddress } = useBarmenContext();
 
   useEffect(() => {
-
     if (yandexMapInitailized === true) {
-      return
+      return;
     }
 
     yandexMapInitailized = true;
-
 
     ymaps.ready(init);
 
     function init() {
       const myMap = new ymaps.Map(
-        "map",
+        'map',
         {
           center: [55.75829427489275, 37.83995274502565],
           zoom: 11,
-          controls: ["routePanelControl"],
+          controls: ['routePanelControl'],
         },
         {
           // searchControlProvider: 'yandex#search'
-        }
+        },
       );
 
-      const control = myMap.controls.get("routePanelControl");
-      let city = "Москва";
+      const control = myMap.controls.get('routePanelControl');
+      let city = 'Москва';
       // Зададим состояние панели для построения машрутов.
       control.routePanel.state.set({
         // Тип маршрутизации.
-        type: "driving",
+        type: 'driving',
 
         // reverseGeocoding: true,
 
@@ -49,10 +46,9 @@ export const useYandexMap = () => {
         // Включим возможность задавать пункт назначения в поле ввода.
         toEnabled: true,
         // Адрес или координаты пункта назначения.
-        to: ` `
+        to: ` `,
       });
       control.routePanel.options.set({
-
         // reverseGeocoding: true,
 
         types: {
@@ -60,25 +56,24 @@ export const useYandexMap = () => {
         },
       });
 
-// Создаем кнопку, с помощью которой пользователи смогут получить начальную и конечную точки маршрута.
+      // Создаем кнопку, с помощью которой пользователи смогут получить начальную и конечную точки маршрута.
       const getPointsButton = new ymaps.control.Button({
         data: {
-          content: "Получить адрес",
-          title: "Получить адрес"
+          content: 'Получить адрес',
+          title: 'Получить адрес',
         },
         options: {
           selectOnClick: false,
-          maxWidth: 190
-        }
+          maxWidth: 190,
+        },
       });
 
       // Объявляем обработчик для кнопки.
-      getPointsButton.events.add('click', function() {
+      getPointsButton.events.add('click', function () {
         // $("#input1").val(control.routePanel.state.get('from'));
 
         // $("#address").val(control.routePanel.state.get('to'));
         setAddress(control.routePanel.state.get('to'));
-        // console.log();
       });
 
       myMap.controls.add(getPointsButton);
@@ -90,19 +85,19 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_250,
         ],
         {
-          hintContent: "250 руб.",
+          hintContent: '250 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(255, 210, 30)",
+          fillColor: 'rgb(255, 210, 30)',
           // Цвет обводки.
-          strokeColor: "rgb(255, 210, 30)",
+          strokeColor: 'rgb(255, 210, 30)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
       myMap.geoObjects.add(myPolygon);
 
@@ -114,20 +109,19 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_350,
         ],
         {
-
-          hintContent: "350 руб.",
+          hintContent: '350 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(27, 173, 3)",
+          fillColor: 'rgb(27, 173, 3)',
           // Цвет обводки.
-          strokeColor: "rgb(27, 173, 3)",
+          strokeColor: 'rgb(27, 173, 3)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
 
       myMap.geoObjects.add(myPolygon);
@@ -139,20 +133,19 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_500,
         ],
         {
-
-          hintContent: "500 руб.",
+          hintContent: '500 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(23, 123, 201)",
+          fillColor: 'rgb(23, 123, 201)',
           // Цвет обводки.
-          strokeColor: "rgb(23, 123, 201)",
+          strokeColor: 'rgb(23, 123, 201)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
 
       myMap.geoObjects.add(myPolygon);
@@ -164,19 +157,19 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_750,
         ],
         {
-          hintContent: "750 руб.",
+          hintContent: '750 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(243, 113, 209)",
+          fillColor: 'rgb(243, 113, 209)',
           // Цвет обводки.
-          strokeColor: "rgb(243, 113, 209)",
+          strokeColor: 'rgb(243, 113, 209)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
 
       myMap.geoObjects.add(myPolygon);
@@ -188,19 +181,19 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_1000_1,
         ],
         {
-          hintContent: "1000 руб.",
+          hintContent: '1000 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(237, 69, 67)",
+          fillColor: 'rgb(237, 69, 67)',
           // Цвет обводки.
-          strokeColor: "rgb(237, 69, 67)",
+          strokeColor: 'rgb(237, 69, 67)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
 
       myMap.geoObjects.add(myPolygon);
@@ -212,19 +205,19 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_1000_2,
         ],
         {
-          hintContent: "1000 руб.",
+          hintContent: '1000 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(237, 69, 67)",
+          fillColor: 'rgb(237, 69, 67)',
           // Цвет обводки.
-          strokeColor: "rgb(237, 69, 67)",
+          strokeColor: 'rgb(237, 69, 67)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
 
       myMap.geoObjects.add(myPolygon);
@@ -236,19 +229,19 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_1000_3,
         ],
         {
-          hintContent: "1000 руб.",
+          hintContent: '1000 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(237, 69, 67)",
+          fillColor: 'rgb(237, 69, 67)',
           // Цвет обводки.
-          strokeColor: "rgb(237, 69, 67)",
+          strokeColor: 'rgb(237, 69, 67)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
 
       myMap.geoObjects.add(myPolygon);
@@ -260,19 +253,19 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_1000_4,
         ],
         {
-          hintContent: "1000 руб.",
+          hintContent: '1000 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(237, 69, 67)",
+          fillColor: 'rgb(237, 69, 67)',
           // Цвет обводки.
-          strokeColor: "rgb(237, 69, 67)",
+          strokeColor: 'rgb(237, 69, 67)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
 
       myMap.geoObjects.add(myPolygon);
@@ -284,23 +277,22 @@ export const useYandexMap = () => {
           POLYGONS.POLYGON_1000_5,
         ],
         {
-          hintContent: "1000 руб.",
+          hintContent: '1000 руб.',
         },
         {
           // Задаем опции геообъекта.
           // Цвет заливки.
-          fillColor: "rgb(237, 69, 67)",
+          fillColor: 'rgb(237, 69, 67)',
           // Цвет обводки.
-          strokeColor: "rgb(237, 69, 67)",
+          strokeColor: 'rgb(237, 69, 67)',
           // Общая прозрачность (как для заливки, так и для обводки).
           opacity: 0.5,
           // Ширина обводки.
           strokeWidth: 2,
-        }
+        },
       );
 
       myMap.geoObjects.add(myPolygon);
     }
-
-  }, [])
-}
+  }, []);
+};

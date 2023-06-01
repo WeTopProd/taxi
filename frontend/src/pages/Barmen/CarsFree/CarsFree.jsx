@@ -1,36 +1,35 @@
 import React from 'react';
-import styles from "./CarsFree.module.scss";
+import styles from './CarsFree.module.scss';
 import cx from 'classnames';
-import {declOfNum} from '../../../helpers/declOfNum';
-import {useBarmenContext} from '../BarmenContext';
+import { declOfNum } from '../../../helpers/declOfNum';
+import { useBarmenContext } from '../BarmenContext';
+import { countByField } from '../../../helpers/countObjects';
 
-const CARS_DECL = [
-  'свободная машина',
-  'свободные машины',
-  'свободных машин'
-]
+const CARS_DECL = ['свободная машина', 'свободные машины', 'свободных машин'];
 
 const CarsFree = () => {
-
-  const {carsFreeCount} = useBarmenContext();
+  const { carsFreeList } = useBarmenContext();
+  const carsFreeCount = countByField(carsFreeList, 'status', 'free');
 
   return (
     <div className={styles.cars}>
-      <span className={cx(styles.cars_label, carsFreeCount ? '' : styles.cars_label__busy)}></span>
+      <span
+        className={cx(
+          styles.cars_label,
+          carsFreeCount ? '' : styles.cars_label__busy,
+        )}></span>
 
-        {
-          carsFreeCount ?
-            <span className={styles.cars_count}>
-              {carsFreeCount} {declOfNum(carsFreeCount, CARS_DECL)}
-            </span> :
-            <span className={cx(styles.cars_count, styles.cars_count__busy)}>
-              нет свободных машин
-            </span>
-        }
-
+      {carsFreeCount ? (
+        <span className={styles.cars_count}>
+          {carsFreeCount} {declOfNum(carsFreeCount, CARS_DECL)}
+        </span>
+      ) : (
+        <span className={cx(styles.cars_count, styles.cars_count__busy)}>
+          нет свободных машин
+        </span>
+      )}
     </div>
-  )
+  );
 };
-
 
 export default CarsFree;

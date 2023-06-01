@@ -1,20 +1,16 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {useQueryCars} from '../../services/api';
-import {QueryNewOrders} from '../../services/orderService';
-import {QueryCars} from '../../services/userService';
-
+import React, { createContext, useContext, useState } from 'react';
+import { QueryNewOrders } from '../../services/orderService';
 
 const initialValue = {
   newOrders: [],
   isLoading: true,
   carsList: [],
-  isLoadingCars: true
-}
+  isLoadingCars: true,
+};
 
-const Context = createContext(initialValue)
+const Context = createContext(initialValue);
 
 export const DriverProvider = ({ children }) => {
-
   const [carId, setCarId] = useState('');
   const [carNumber, setCarNumber] = useState('');
   const [driverName, setDriverName] = useState('');
@@ -23,12 +19,12 @@ export const DriverProvider = ({ children }) => {
 
   const timeRefreshOrders = driverStatus === 'свободен' ? 1000 : 0;
 
-  const {data: newOrders = [], isLoading: isLoadingOrders = true} = QueryNewOrders(timeRefreshOrders);
-
+  const { data: newOrders = [], isLoading: isLoadingOrders = true } =
+    QueryNewOrders(timeRefreshOrders);
 
   return (
-    <Context.Provider value={
-      {
+    <Context.Provider
+      value={{
         newOrders,
         isLoadingOrders,
         carId,
@@ -40,18 +36,19 @@ export const DriverProvider = ({ children }) => {
         driverPhone,
         setDriverPhone,
         driverStatus,
-        setDriverStatus
-      }
-    }>{children}</Context.Provider>
-  )
-}
+        setDriverStatus,
+      }}>
+      {children}
+    </Context.Provider>
+  );
+};
 
 export const useDriverContext = () => {
-  const context = useContext(Context)
+  const context = useContext(Context);
 
   if (!context) {
-    throw Error('No Driver context found.')
+    throw Error('No Driver context found.');
   }
 
-  return context
-}
+  return context;
+};

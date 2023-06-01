@@ -1,45 +1,45 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './Login.module.scss';
-import {setToken} from '../../services/localStorageService';
-import {routes} from '../../helpers/routes';
-import {useNavigate} from 'react-router-dom';
+import { setToken } from '../../services/localStorageService';
+import { routes } from '../../helpers/routes';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import {loginQuery} from '../../services/authService';
-
+import { loginQuery } from '../../services/authService';
 
 function Login() {
-
   const [inputPhone, setInputPhone] = useState('');
   const [inputPassword, setInputPassword] = useState('');
 
   const navigate = useNavigate();
 
-  const  onSuccessLogin = (res) => {
+  const onSuccessLogin = (res) => {
     const token = res?.data?.auth_token;
     setToken(token);
-    navigate(routes.driver)
-  }
+    navigate(routes.driver);
+  };
 
   const onSubmitLogin = (e) => {
-    e.preventDefault()
-    loginQuery(inputPhone,inputPassword)
-      .then(res => {
-        res.request.status === 200 ? onSuccessLogin(res) : alert('неверные данные')
-      } )
-      .catch(err => {
+    e.preventDefault();
+    loginQuery(inputPhone, inputPassword)
+      .then((res) => {
+        res.request.status === 200
+          ? onSuccessLogin(res)
+          : alert('неверные данные');
+      })
+      .catch((err) => {
         alert('Данные введены с ошибкой');
         console.log(err);
-      })
-  }
+      });
+  };
 
   return (
     <div className={styles.container}>
-      <Header isAuth={false}/>
+      <Header isAuth={false} />
       <section className={styles.login_wrapper}>
         <h2>Вход в личный кабинет</h2>
         <form onSubmit={onSubmitLogin}>
           <input
-            type='text'
+            type="text"
             onChange={(e) => setInputPhone(e.target.value)}
             value={inputPhone}
             placeholder="Телефон"
@@ -50,7 +50,7 @@ function Login() {
           <input
             type="password"
             value={inputPassword}
-            onChange={event => setInputPassword(event.target.value)}
+            onChange={(event) => setInputPassword(event.target.value)}
             placeholder="Пароль"
             name="driver_password_login"
             id="driver_password_login"
@@ -60,7 +60,7 @@ function Login() {
         </form>
       </section>
     </div>
-  )
+  );
 }
 
 export default Login;

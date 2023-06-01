@@ -1,10 +1,9 @@
 import React from 'react';
-import styles from "./Map.module.scss";
-import {useYandexMap} from './useYandexMap';
+import styles from './Map.module.scss';
+import { useYandexMap } from './useYandexMap';
 import cx from 'classnames';
 
 const Map = () => {
-
   useYandexMap();
 
   return (
@@ -15,10 +14,12 @@ const Map = () => {
         <li className={cx(styles.legend_item, styles.legend_item_350)}>350р</li>
         <li className={cx(styles.legend_item, styles.legend_item_500)}>500р</li>
         <li className={cx(styles.legend_item, styles.legend_item_750)}>750р</li>
-        <li className={cx(styles.legend_item, styles.legend_item_1000)}>1000р</li>
+        <li className={cx(styles.legend_item, styles.legend_item_1000)}>
+          1000р
+        </li>
       </ul>
     </div>
-  )
+  );
 };
 
 export default Map;

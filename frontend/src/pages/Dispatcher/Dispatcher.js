@@ -1,18 +1,15 @@
 import styles from './Dispatcher.module.scss';
 import Header from './Header/Header';
-import Car from './Car/Car';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import changeMeta from '../../helpers/changeMeta';
 import OrdersNew from './OrdersNew/OrdersNew';
-import {DispatcherProvider, useDispatcherContext} from './DispatcherContext';
+import { DispatcherProvider } from './DispatcherContext';
 import CarsList from './CarsList/CarsList';
-
 
 const PAGE_TITLE = 'Диспетчер - "БКФ Такси"';
 const PAGE_FAVICON = '/favicon_dispatcher.ico';
 
 function Dispatcher() {
-
   useEffect(() => changeMeta(PAGE_TITLE, PAGE_FAVICON), []);
 
   return (
@@ -27,7 +24,6 @@ function Dispatcher() {
         </main>
       </div>
     </DispatcherProvider>
-
   );
 }
 
