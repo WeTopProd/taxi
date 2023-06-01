@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from "./CarsFree.module.scss";
 import cx from 'classnames';
 import {declOfNum} from '../../../helpers/declOfNum';
+import {useBarmenContext} from '../BarmenContext';
 
 const CARS_DECL = [
   'свободная машина',
@@ -11,16 +12,16 @@ const CARS_DECL = [
 
 const CarsFree = () => {
 
-  const [carsCount, setCarsCount] = useState(0);
+  const {carsFreeCount} = useBarmenContext();
 
   return (
     <div className={styles.cars}>
-      <span className={cx(styles.cars_label, carsCount ? '' : styles.cars_label__busy)}></span>
+      <span className={cx(styles.cars_label, carsFreeCount ? '' : styles.cars_label__busy)}></span>
 
         {
-          carsCount ?
+          carsFreeCount ?
             <span className={styles.cars_count}>
-              {carsCount} {declOfNum(carsCount, CARS_DECL)}
+              {carsFreeCount} {declOfNum(carsFreeCount, CARS_DECL)}
             </span> :
             <span className={cx(styles.cars_count, styles.cars_count__busy)}>
               нет свободных машин

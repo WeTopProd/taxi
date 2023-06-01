@@ -1,8 +1,14 @@
 import React from 'react';
 import styles from "./DriverPopup.module.scss";
+import {takeNewOrder} from '../../../services/userService';
 
 
 const DriverPopup = ({address, orderId}) => {
+
+  const onSubmitOrder = (orderId) => {
+    return takeNewOrder(orderId)
+      .then((response) => console.log(response));
+  }
 
   return (
     <>
@@ -11,7 +17,7 @@ const DriverPopup = ({address, orderId}) => {
         <p><b>Адрес:</b><br/><br/> {address}</p>
       {
         <div className={styles.btns}>
-          <button className={styles.btn}>Принять</button>
+          <button onClick={() => onSubmitOrder(orderId)} className={styles.btn}>Принять</button>
         </div>
       }
       </div>
