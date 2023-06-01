@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-amt#&x4wa&%g36xxaf&hny2lufnmwmi_uvqn=bbr&9(fl2a3sa'
 
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     ALLOWED_HOSTS = [
@@ -15,7 +15,6 @@ if DEBUG:
     ]
 else:
     ALLOWED_HOSTS = [
-        'frantsuz.ru',
         '37.140.195.3',
     ]
 
@@ -79,8 +78,8 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'academy_db',
-            'USER': 'academy_user',
+            'NAME': 'taxi',
+            'USER': 'taxi_user',
             'PASSWORD': '20031956tAA',
             'HOST': '37.140.195.3',
             'PORT': '5432'
@@ -139,15 +138,9 @@ if DEBUG:
     CORS_ORIGIN_ALLOW_ALL = True
 else:
     CORS_ALLOWED_ORIGINS = [
-        'https://frantsuz.ru',
         'https://37.140.195.3',
-        'https://37.140.195.3:3000',
-        'https://37.140.195.3:8000',
-        'https://shashlandia.ru',
-        'https://37.140.192.105',
-        'https://37.140.192.105:3000',
-        'https://37.140.192.105:8000',
-        'https://pominki-dostavka.ru',
+        'https://37.140.195.3:3001',
+        'https://37.140.195.3:8001',
     ]
 
 
