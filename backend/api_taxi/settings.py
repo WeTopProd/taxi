@@ -15,7 +15,8 @@ if DEBUG:
     ]
 else:
     ALLOWED_HOSTS = [
-        '37.140.195.3',
+        '37.140.195.3'
+        '37.140.195.3:3001',
     ]
 
 
@@ -138,9 +139,7 @@ if DEBUG:
     CORS_ORIGIN_ALLOW_ALL = True
 else:
     CORS_ALLOWED_ORIGINS = [
-        'https://37.140.195.3',
-        'https://37.140.195.3:3001',
-        'https://37.140.195.3:8001',
+        'http://37.140.195.3:3001',
     ]
 
 
