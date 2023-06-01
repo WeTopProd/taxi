@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useQueryCars} from '../../services/api';
 import {QueryNewOrders} from '../../services/orderService';
 import {QueryCars} from '../../services/userService';
@@ -19,11 +19,12 @@ export const DriverProvider = ({ children }) => {
   const [carNumber, setCarNumber] = useState('');
   const [driverName, setDriverName] = useState('');
   const [driverPhone, setDriverPhone] = useState('');
+  const [driverStatus, setDriverStatus] = useState('занят');
 
-  const {data: newOrders = [], isLoading: isLoadingOrders = true} = QueryNewOrders(3000);
+  const timeRefreshOrders = driverStatus === 'свободен' ? 1000 : 0;
 
+  const {data: newOrders = [], isLoading: isLoadingOrders = true} = QueryNewOrders(timeRefreshOrders);
 
-  // const {data: carsList = [], isLoading: isLoadingCars = true} = QueryCars(3000);
 
   return (
     <Context.Provider value={
@@ -37,7 +38,9 @@ export const DriverProvider = ({ children }) => {
         driverName,
         setDriverName,
         driverPhone,
-        setDriverPhone
+        setDriverPhone,
+        driverStatus,
+        setDriverStatus
       }
     }>{children}</Context.Provider>
   )

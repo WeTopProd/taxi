@@ -6,7 +6,8 @@ import {changeDriverDataQuery} from '../../../services/userService';
 
 
 const DriverStatus = () => {
-  const [driverStatus, setDriverStatus] = useState('занят');
+
+  const {driverStatus, setDriverStatus} = useDriverContext()
 
   const {carId} = useDriverContext();
 

@@ -20,7 +20,7 @@ function DriverContainer() {
 }
 
 function Driver() {
-  const {newOrders, setCarId, setCarNumber, setDriverName, setDriverPhone} = useDriverContext();
+  const {newOrders, setCarId, setCarNumber, setDriverName, setDriverPhone, driverStatus} = useDriverContext();
 
   console.log('page', newOrders);
 
@@ -46,9 +46,10 @@ function Driver() {
       <main>
         <DriverStatus />
         {
+          driverStatus === 'свободен' ?
           newOrders.map((newOrder, index) => {
             return <DriverPopup key={index} address={newOrder.address} orderId={newOrder.id}/>
-          })
+          }) : ''
         }
 
       </main>
