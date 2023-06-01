@@ -28,7 +28,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ]
     )
     first_name = models.CharField(max_length=150)
-
     phone = PhoneNumberField(
         verbose_name='Телефон',
         unique=True,
