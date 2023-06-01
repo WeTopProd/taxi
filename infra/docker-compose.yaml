@@ -20,9 +20,8 @@ services:
     volumes:
       - static_value:/app/backend_static/
       - media_value:/app/backend_media/
-    env_file: .env
 
-  nginx:
+  nginx_taxi:
     image: nginx:1.21.3-alpine
     ports:
       - "81:81"
