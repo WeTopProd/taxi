@@ -4,7 +4,6 @@ import {$api, HOST} from './api';
 
 const BASE_URL_DRIVERS = `/users/`;
 const BASE_URL_DRIVERS_W_HOST = `${HOST}/users/`;
-const BASE_URL_DRIVER_INFO_BY_TOKEN = `/users/me/`;
 
 export const submitAddCar = (data) => axios.post(BASE_URL_DRIVERS_W_HOST, data);
 

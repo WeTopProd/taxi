@@ -25,9 +25,10 @@ export async function submitOrder(data) {
 }
 
 export const QueryNewOrders = (time) => useQuery({
-  queryFn: () => fetchOrders()
+  queryFn: () => fetchNewOrders('new')
     .then((data) => {
-      return data?.data.results;
+      console.log(data.data?.results);
+      return data.data?.results;
     }),
   queryKey: ['newOrders'],
   refetchInterval: time,
