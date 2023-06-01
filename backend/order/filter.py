@@ -1,5 +1,5 @@
-from django_filters.rest_framework import (FilterSet, filters,
-                                           MultipleChoiceFilter)
+from django_filters.rest_framework import (FilterSet, MultipleChoiceFilter,
+                                           filters)
 
 from .models import Order
 

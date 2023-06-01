@@ -1,12 +1,11 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import status, viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .filter import OrderFilter
-from .pagination import CustomPagination
 from .models import Order
+from .pagination import CustomPagination
 from .serializers import OrderSerializer
 
 
