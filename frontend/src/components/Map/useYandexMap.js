@@ -294,5 +294,5 @@ export const useYandexMap = () => {
 
       myMap.geoObjects.add(myPolygon);
     }
-  }, []);
+  });
 };

@@ -42,7 +42,7 @@ function Driver() {
         alert('Ошибка получения данных');
         console.log(err);
       });
-  }, []);
+  });
 
   return (
     <div className={styles.container}>

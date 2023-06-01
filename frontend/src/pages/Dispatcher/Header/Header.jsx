@@ -8,7 +8,7 @@ import Orders from '../Orders/Orders';
 const Header = () => {
   return (
     <header className={styles.header}>
-      <img className={styles.logo} src={mainLogo} />
+      <img className={styles.logo} src={mainLogo} alt={'logo'} />
       <div className={styles.btns}>
         <AddCar />
         <Orders />
