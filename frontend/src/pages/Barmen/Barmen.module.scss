@@ -13,7 +13,7 @@
   overflow: auto;
 }
 
-.form {
+.left {
   padding: 40px;
   border-right: 1px solid #404040;
 }
@@ -21,4 +21,14 @@
 .map {
   padding: 40px;
   margin: 0 auto;
+}
+
+.form {
+  margin-bottom: 40px;
+}
+
+.orders_list {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #FFFFFF;
 }

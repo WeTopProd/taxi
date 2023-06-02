@@ -19,8 +19,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path={routes.login} element={<Login />} />
-        <Route path="dispatcher" element={<Dispatcher />} />
-        <Route path="barmen" element={<Barmen />} />
+        <Route path={routes.dispatcher} element={<Dispatcher />} />
+        <Route path={routes.barmen} element={<Barmen />} />
         <Route path={routes.driver} element={<DriverContainer />} />
       </Routes>
     </QueryClientProvider>
