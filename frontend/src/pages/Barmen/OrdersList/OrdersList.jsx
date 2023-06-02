@@ -2,6 +2,7 @@ import React from 'react';
 import { fetchOrders } from '../../../services/orderService';
 import Order from '../Order/Order';
 import { useQuery } from '@tanstack/react-query';
+import styles from './OrdersList.module.scss';
 
 const OrdersList = () => {
   const { data: orders = [] } = useQuery({
@@ -15,7 +16,7 @@ const OrdersList = () => {
   });
 
   return (
-    <div>
+    <div className={styles.orders_list}>
       {orders.length > 0 ? (
         orders.map((order, index) => {
           return <Order key={index} order={order} />;

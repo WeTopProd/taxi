@@ -18,9 +18,13 @@ function Barmen() {
       <BarmenProvider>
         <Header />
         <main className={styles.main}>
-          <div className={styles.form}>
-            <Form />
-            <OrdersList />
+          <div className={styles.left}>
+            <div className={styles.form}>
+              <Form />
+            </div>
+            <div className={styles.orders_list}>
+              <OrdersList />
+            </div>
           </div>
           <div className={styles.map}>
             <Map />
