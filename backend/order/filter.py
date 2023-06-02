@@ -5,12 +5,17 @@ from users.models import Driver
 
 
 class OrderFilter(FilterSet):
+    driver = filters.MultipleChoiceFilter(
+        field_name='driver',
+        choices=()
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        drivers_id = Driver.objects.values_list('id', flat=True).distinct()
-        self.filters['driver_id'].extra['choices'] = drivers_id
-
+        drivers_id = Driver.objects.values_list('pk', flat=True)
+        self.filters['driver'].extra['choices'] = zip(
+            drivers_id, drivers_id
+        )
     name = filters.CharFilter(
         lookup_expr='icontains',
         field_name='name'
@@ -31,15 +36,12 @@ class OrderFilter(FilterSet):
         choices=Order.STATUS_ORDER,
         field_name='status'
     )
-    driver_id = filters.MultipleChoiceFilter(
-        field_name='driver'
-    )
 
     class Meta:
         model = Order
         fields = (
             'status',
-            'driver_id',
+            'driver',
             'name',
             'phone',
             'address',

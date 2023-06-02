@@ -27,13 +27,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             )
         ]
     )
-    first_name = models.CharField(max_length=150)
+    first_name = models.CharField(
+        verbose_name='Имя водителя',
+        max_length=150
+    )
     phone = PhoneNumberField(
         verbose_name='Телефон',
         unique=True,
         validators=[validate_phone_number]
     )
     status = models.CharField(
+        verbose_name='Статус водителя',
         max_length=30,
         choices=STATUS_DRIVER,
         default='busy'
