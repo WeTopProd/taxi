@@ -7,22 +7,37 @@ class Order(models.Model):
     STATUS_ORDER = (
         ('new', 'Новый'),
         ('confirmed', 'Подтвержден'),
+        ('complete', 'Завершен'),
         ('canceled', 'Отменен'),
     )
-    name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=255)
-    address = models.CharField(max_length=500)
-    date_time = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Имя заказчика'
+    )
+    phone = models.CharField(
+        max_length=255,
+        verbose_name='Номер заказчика'
+    )
+    address = models.CharField(
+        max_length=500,
+        verbose_name='Адрес'
+    )
+    date_time = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата и время'
+    )
     status = models.CharField(
         max_length=30,
         choices=STATUS_ORDER,
-        default='new'
+        default='new',
+        verbose_name='Статус заказа'
     )
     driver = models.ForeignKey(
         Driver,
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        verbose_name='Водитель'
     )
 
     class Meta:

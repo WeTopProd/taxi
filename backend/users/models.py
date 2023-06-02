@@ -1,8 +1,8 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
+from django.core.validators import RegexValidator
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
-from django.core.validators import RegexValidator
 
 from .managers import UserManager
 from .validators import validate_phone_number
