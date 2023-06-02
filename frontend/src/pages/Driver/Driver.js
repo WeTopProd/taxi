@@ -26,6 +26,7 @@ function Driver() {
     setDriverName,
     setDriverPhone,
     driverStatus,
+    setDriverStatus,
   } = useDriverContext();
 
   useEffect(() => {
@@ -37,6 +38,7 @@ function Driver() {
         setCarNumber(res.data.car_number);
         setDriverName(res.data.first_name);
         setDriverPhone(res.data.phone);
+        setDriverStatus(res.data.status);
       })
       .catch((err) => {
         alert('Ошибка получения данных');

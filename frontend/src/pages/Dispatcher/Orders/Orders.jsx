@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './Orders.module.scss';
 import cx from 'classnames';
 import { useOnClickOutside } from '../../../helpers/hooks';
-import { ORDERS_NAMES } from '../../../helpers/orders_names';
+import { Dictionaries } from '../../../helpers/dictionaries';
 import { fetchOrders } from '../../../services/orderService';
 
 const Orders = () => {
@@ -83,7 +83,7 @@ const Orders = () => {
                           {orderItem.phone}
                         </td>
                         <td className={styles.orders_status}>
-                          {ORDERS_NAMES[orderItem.status]}
+                          {Dictionaries[orderItem.status]}
                         </td>
                       </tr>
                     ))

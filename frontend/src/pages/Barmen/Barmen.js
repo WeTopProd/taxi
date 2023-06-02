@@ -5,6 +5,7 @@ import Map from '../../components/Map/Map';
 import { useEffect } from 'react';
 import changeMeta from '../../helpers/changeMeta';
 import { BarmenProvider } from './BarmenContext';
+import OrdersList from './OrdersList/OrdersList';
 
 const PAGE_TITLE = 'Бармен - "БКФ Такси"';
 const PAGE_FAVICON = '/favicon_barmen.ico';
@@ -19,6 +20,7 @@ function Barmen() {
         <main className={styles.main}>
           <div className={styles.form}>
             <Form />
+            <OrdersList />
           </div>
           <div className={styles.map}>
             <Map />

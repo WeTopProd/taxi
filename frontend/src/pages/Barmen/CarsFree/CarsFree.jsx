@@ -4,8 +4,7 @@ import cx from 'classnames';
 import { declOfNum } from '../../../helpers/declOfNum';
 import { useBarmenContext } from '../BarmenContext';
 import { countByField } from '../../../helpers/countObjects';
-
-const CARS_DECL = ['свободная машина', 'свободные машины', 'свободных машин'];
+import { CARS_DECL } from '../../../helpers/dictionaries';
 
 const CarsFree = () => {
   const { carsFreeList } = useBarmenContext();

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './OrdersNew.module.scss';
 import { useDispatcherContext } from '../DispatcherContext';
-import { ORDERS_NAMES } from '../../../helpers/orders_names';
+import { Dictionaries } from '../../../helpers/dictionaries';
 
 const OrdersNew = () => {
   const { newOrders, isLoadingOrders } = useDispatcherContext();
@@ -30,7 +30,7 @@ const OrdersNew = () => {
                   <td className={styles.orders_name}>{orderItem.name}</td>
                   <td className={styles.orders_phone}>{orderItem.phone}</td>
                   <td className={styles.orders_status}>
-                    {ORDERS_NAMES[orderItem.status]}
+                    {Dictionaries[orderItem.status]}
                   </td>
                 </tr>
               ))

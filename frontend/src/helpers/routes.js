@@ -1,4 +1,6 @@
 export const routes = {
-  driver: '/driver',
   login: '/login',
+  driver: '/driver',
+  barmen: '/barmen',
+  dispatcher: '/dispatcher',
 };
