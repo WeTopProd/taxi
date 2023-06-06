@@ -9,7 +9,7 @@ router.register('orders', OrderViewSet)
 
 urlpatterns = [
     path(
-        'takeorder/<int:order_id>/',
+        'take-order/<int:order_id>/',
         TakeOrderView.as_view(),
         name='take-order'
     ),
