@@ -6,6 +6,7 @@ from users.models import Driver
 class Order(models.Model):
     STATUS_ORDER = (
         ('new', 'Новый'),
+        ('assigned', 'Назначен'),
         ('confirmed', 'Подтвержден'),
         ('complete', 'Завершен'),
         ('canceled', 'Отменен'),
@@ -26,6 +27,7 @@ class Order(models.Model):
         auto_now_add=True,
         verbose_name='Дата и время'
     )
+    price = models.IntegerField(verbose_name='Цена поездки')
     status = models.CharField(
         max_length=30,
         choices=STATUS_ORDER,
@@ -47,3 +49,25 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Заказ по адресу {self.address}'
+
+
+class RefuseOrder(models.Model):
+    driver = models.ForeignKey(
+        Driver,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Водитель'
+    )
+    comment = models.CharField(
+        verbose_name='Комментарий по отмене',
+        max_length=1000
+    )
+
+    class Meta:
+        verbose_name = 'Отмененный заказ'
+        verbose_name_plural = 'Отмененные заказы'
+        ordering = ['-driver']
+
+    def __str__(self):
+        return f'Заказ водителя {self.driver} отменен'
