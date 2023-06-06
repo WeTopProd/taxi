@@ -2,10 +2,12 @@ import styles from './Driver.module.scss';
 import Header from '../../components/Header/Header';
 import DriverStatus from './DriverStatus/DriverStatus';
 import DriverPopup from './DriverPopup/DriverPopup';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import changeMeta from '../../helpers/changeMeta';
 import { DriverProvider, useDriverContext } from './DriverContext';
 import { getDriverInfoByToken } from '../../services/userService';
+import { useQuery } from '@tanstack/react-query';
+import { fetchOrdersByDriver } from '../../services/orderService';
 
 const PAGE_TITLE = 'Водитель - "БКФ Такси"';
 const PAGE_FAVICON = '/favicon_driver.ico';
@@ -20,12 +22,12 @@ function DriverContainer() {
 
 function Driver() {
   const {
-    newOrders,
+    driverOrders,
+    carId,
     setCarId,
     setCarNumber,
     setDriverName,
     setDriverPhone,
-    driverStatus,
     setDriverStatus,
   } = useDriverContext();
 
@@ -51,13 +53,13 @@ function Driver() {
       <Header isAuth={true} />
       <main>
         <DriverStatus />
-        {driverStatus === 'свободен'
-          ? newOrders.map((newOrder, index) => {
+        {driverOrders.length
+          ? driverOrders.map((order, index) => {
               return (
                 <DriverPopup
                   key={index}
-                  address={newOrder.address}
-                  orderId={newOrder.id}
+                  address={order.address}
+                  orderId={order.id}
                 />
               );
             })

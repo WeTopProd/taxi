@@ -1,8 +1,13 @@
-import React, { createContext, useContext, useState } from 'react';
-import { QueryNewOrders } from '../../services/orderService';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import {
+  fetchNewOrders,
+  fetchOrdersByDriver,
+  QueryNewOrders,
+} from '../../services/orderService';
+import { useQuery } from '@tanstack/react-query';
 
 const initialValue = {
-  newOrders: [],
+  driverOrders: [],
   isLoading: true,
   carsList: [],
   isLoadingCars: true,
@@ -19,14 +24,20 @@ export const DriverProvider = ({ children }) => {
 
   const timeRefreshOrders = driverStatus === 'свободен' ? 1000 : 0;
 
-  const { data: newOrders = [], isLoading: isLoadingOrders = true } =
-    QueryNewOrders(timeRefreshOrders);
+  const { data: driverOrders = [] } = useQuery({
+    queryFn: () => fetchOrdersByDriver(carId).then((res) => res.data.results),
+    queryKey: [carId],
+    refetchInterval: timeRefreshOrders,
+    retry: 5,
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
   return (
     <Context.Provider
       value={{
-        newOrders,
-        isLoadingOrders,
+        driverOrders,
         carId,
         setCarId,
         carNumber,

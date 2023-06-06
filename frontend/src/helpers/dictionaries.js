@@ -1,4 +1,4 @@
-export const Dictionaries = {
+export const ORDERS_NAMES = {
   new: 'новый',
   confirmed: 'подтвержден',
   canceled: 'отменен',
@@ -15,3 +15,8 @@ export const CARS_DECL = [
   'свободные машины',
   'свободных машин',
 ];
+
+export const STATUS_CAR_NAMES = {
+  free: 'свободен',
+  busy: 'занят',
+};

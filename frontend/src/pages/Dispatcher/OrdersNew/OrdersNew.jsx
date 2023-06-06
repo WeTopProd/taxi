@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './OrdersNew.module.scss';
 import { useDispatcherContext } from '../DispatcherContext';
-import { Dictionaries } from '../../../helpers/dictionaries';
+import { ORDERS_NAMES } from '../../../helpers/dictionaries';
 
 const OrdersNew = () => {
   const { newOrders, isLoadingOrders } = useDispatcherContext();
@@ -15,13 +15,14 @@ const OrdersNew = () => {
               <th className={styles.orders_id}>Номер заказа</th>
               <th className={styles.orders_name}>Имя клиента</th>
               <th className={styles.orders_phone}>Телефон клиента</th>
+              <th>Адрес</th>
               <th className={styles.orders_status}>Статус заказа</th>
             </tr>
           </thead>
           <tbody>
             {isLoadingOrders ? (
               <tr>
-                <td>Данные загружаются</td>
+                <td>Нет новых заказов</td>
               </tr>
             ) : (
               newOrders.map((orderItem, index) => (
@@ -29,8 +30,9 @@ const OrdersNew = () => {
                   <td className={styles.orders_id}>{orderItem.id}</td>
                   <td className={styles.orders_name}>{orderItem.name}</td>
                   <td className={styles.orders_phone}>{orderItem.phone}</td>
+                  <td className={styles.orders_address}>{orderItem.address}</td>
                   <td className={styles.orders_status}>
-                    {Dictionaries[orderItem.status]}
+                    {ORDERS_NAMES[orderItem.status]}
                   </td>
                 </tr>
               ))

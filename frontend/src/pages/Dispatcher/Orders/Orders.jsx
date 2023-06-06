@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './Orders.module.scss';
 import cx from 'classnames';
 import { useOnClickOutside } from '../../../helpers/hooks';
-import { Dictionaries } from '../../../helpers/dictionaries';
-import { fetchOrders } from '../../../services/orderService';
+import { ORDERS_NAMES } from '../../../helpers/dictionaries';
+import { fetchOrdersByPage } from '../../../services/orderService';
 
 const Orders = () => {
   const [isOpenOrders, setIsOpenOrders] = useState(false);
@@ -22,7 +22,7 @@ const Orders = () => {
   const fetchOrderList = (page) => {
     setIsLoading(true);
 
-    fetchOrders(page)
+    fetchOrdersByPage(page)
       .then((data) => {
         setPrevPage(data?.data.previous);
         setNextPage(data?.data.next);
@@ -83,7 +83,7 @@ const Orders = () => {
                           {orderItem.phone}
                         </td>
                         <td className={styles.orders_status}>
-                          {Dictionaries[orderItem.status]}
+                          {ORDERS_NAMES[orderItem.status]}
                         </td>
                       </tr>
                     ))

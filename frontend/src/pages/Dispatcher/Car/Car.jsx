@@ -1,17 +1,53 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './Car.module.scss';
 import carBusyIMG from '../../../assets/img/car_busy.png';
 import carFreeIMG from '../../../assets/img/car_free.png';
 import cx from 'classnames';
+import { STATUS_CAR_NAMES } from '../../../helpers/dictionaries';
+import { useDispatcherContext } from '../DispatcherContext';
+import { useOnClickOutside } from '../../../helpers/hooks';
+import {
+  changeDriverStatus,
+  orderRequestByDispatcher,
+} from '../../../services/orderService';
 
-const STATUS_NAMES = {
-  free: 'свободен',
-  busy: 'занят',
-};
+const Car = ({ driverId, driverName, driverPhone, carNumber, status }) => {
+  const [carPopupIsOpen, setCarPopupIsOpen] = useState(false);
+  const { newOrders } = useDispatcherContext();
 
-const Car = ({ driverName, driverPhone, carNumber, status }) => {
+  const popupOrdersRef = useRef(null);
+  const openNewOrdersRef = useRef(null);
+
+  useOnClickOutside(popupOrdersRef, openNewOrdersRef, () =>
+    setCarPopupIsOpen(false),
+  );
+  const handlerClickOrder = (orderId, driverId) => {
+    orderRequestByDispatcher(orderId, driverId).then(() =>
+      alert(`Заказ N${orderId} отправлен водителю`),
+    );
+  };
   return (
-    <div className={styles.car}>
+    <div
+      ref={openNewOrdersRef}
+      onClick={() => setCarPopupIsOpen(!carPopupIsOpen)}
+      className={styles.car}>
+      {carPopupIsOpen && status === 'free' ? (
+        <div ref={popupOrdersRef} className={styles.carPopup}>
+          <h3 className={styles.carPopup_title}>Назначить заказ</h3>
+          <ul className={styles.carPopup_list}>
+            {newOrders.map((order, index) => (
+              <li
+                onClick={() => handlerClickOrder(order.id, driverId)}
+                className={styles.carPopup_item}
+                key={index}>
+                {order.id}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        ''
+      )}
       <div className={styles.image}>
         <h3 className={styles.title}>Автомобиль</h3>
         <img
@@ -35,7 +71,7 @@ const Car = ({ driverName, driverPhone, carNumber, status }) => {
               styles.status,
               status === 'free' ? styles.status_free : '',
             )}></span>
-          <b>{STATUS_NAMES[status]}</b>
+          <b>{STATUS_CAR_NAMES[status]}</b>
         </p>
       </div>
     </div>

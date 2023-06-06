@@ -4,13 +4,21 @@ import { HOST } from './api';
 
 const BASE_URL_ORDERS = `${HOST}/orders/`;
 
-export async function fetchOrders(page = 1) {
+export async function fetchOrdersByPage(page = 1) {
   return await axios.get(BASE_URL_ORDERS, {
     params: {
       page: page,
     },
   });
 }
+
+export const fetchOrdersByDriver = (carId) => {
+  return axios.get(BASE_URL_ORDERS, {
+    params: {
+      driver: carId,
+    },
+  });
+};
 
 export const fetchNewOrders = (status = '') =>
   axios
@@ -32,6 +40,18 @@ export const QueryNewOrders = (time) =>
     refetchInterval: time,
     retry: 5,
     onError: (error) => {
-      alert(error);
+      console.error(error);
     },
   });
+
+export async function changeOrderStatus(order_id, order_status) {
+  return await axios.patch(BASE_URL_ORDERS + `${order_id}/`, {
+    status: order_status,
+  });
+}
+
+export async function orderRequestByDispatcher(order_id, driver_id) {
+  return await axios.patch(BASE_URL_ORDERS + `${order_id}/`, {
+    driver: driver_id,
+  });
+}

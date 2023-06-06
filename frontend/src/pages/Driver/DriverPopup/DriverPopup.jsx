@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './DriverPopup.module.scss';
-import { takeNewOrder } from '../../../services/userService';
+import { changeOrderStatus } from '../../../services/orderService';
 
 const DriverPopup = ({ address, orderId }) => {
+  const [isExecutingOrder, setIsExecutingOrder] = useState(false);
+
   const onSubmitOrder = (orderId) => {
-    return takeNewOrder(orderId)
-      .then((response) => console.log(response))
+    return changeOrderStatus(orderId, 'confirmed')
+      .then((response) => setIsExecutingOrder(true))
+      .catch((err) => {
+        alert(err.response.data.error);
+      });
+  };
+
+  const onCompleteOrder = (orderId) => {
+    return changeOrderStatus(orderId, 'complete')
+      .then((response) => setIsExecutingOrder(false))
+      .catch((err) => {
+        alert(err.response.data.error);
+      });
+  };
+
+  const onCancelOrder = (orderId) => {
+    return changeOrderStatus(orderId, 'new')
+      .then((response) => {
+        setIsExecutingOrder(false);
+      })
       .catch((err) => {
         alert(err.response.data.error);
       });
@@ -20,15 +40,28 @@ const DriverPopup = ({ address, orderId }) => {
           <br />
           <br /> {address}
         </p>
-        {
-          <div className={styles.btns}>
+        <div className={styles.btns}>
+          {isExecutingOrder ? (
             <button
-              onClick={() => onSubmitOrder(orderId)}
+              onClick={() => onCompleteOrder(orderId)}
               className={styles.btn}>
-              Принять
+              Завершить заказ
             </button>
-          </div>
-        }
+          ) : (
+            <div className={styles.btns_submit}>
+              <button
+                onClick={() => onSubmitOrder(orderId)}
+                className={styles.btn}>
+                Подтвердить заказ
+              </button>
+              <button
+                onClick={() => onCancelOrder(orderId)}
+                className={styles.btn}>
+                Отклонить
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

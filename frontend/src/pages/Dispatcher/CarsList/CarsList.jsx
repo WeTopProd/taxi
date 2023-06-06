@@ -14,6 +14,7 @@ const CarsList = () => {
           return (
             <Car
               key={index}
+              driverId={car.id}
               driverName={car.first_name}
               driverPhone={car.phone}
               carNumber={car.car_number}
