@@ -3,6 +3,8 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from users.models import Driver
+
 from .filter import OrderFilter
 from .models import Order, RefuseOrder
 from .pagination import CustomPagination
@@ -53,8 +55,13 @@ class AssignOrderView(APIView):
         if order.status != 'new':
             return Response({'error': 'Заказ уже занят или подтвержден'},
                             status=status.HTTP_400_BAD_REQUEST)
+        try:
+            driver = Driver.objects.get(id=driver_id)
+        except Driver.DoesNotExist:
+            return Response({'error': 'Водитель не найден'},
+                            status=status.HTTP_404_NOT_FOUND)
         order.status = 'assigned'
-        order.driver = driver_id
+        order.driver = driver
         order.save()
         return Response(
             {'message': 'Заказ успешно назначен',
