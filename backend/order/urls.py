@@ -14,17 +14,17 @@ urlpatterns = [
         name='take-order'
     ),
     path(
-        'assign-order/',
+        'assign-order/<int:order_id>/<int:driver_id>/',
         AssignOrderView.as_view(),
         name='assign-order'
     ),
     path(
-        'refuse-order/',
+        'refuse-order/<int:order_id>/',
         RefuseOrderView.as_view(),
         name='refuse-order'
     ),
     path(
-        'complete-order/',
+        'complete-order/<int:order_id>/',
         CompleteOrderView.as_view(),
         name='complete-order'
     ),

@@ -64,7 +64,7 @@ class AssignOrderView(APIView):
 
 
 class RefuseOrderView(APIView):
-    def post(self, request, order_id, comment):
+    def post(self, request, order_id):
         try:
             order = Order.objects.get(id=order_id)
         except Order.DoedNotExist:
@@ -73,8 +73,9 @@ class RefuseOrderView(APIView):
         order.driver = None
         order.status = 'new'
         order.save()
-        refuse_order = RefuseOrder.objects.all()
+        refuse_order = RefuseOrder()
         refuse_order.driver = request.user
+        comment = request.data.get('comment', '')
         refuse_order.comment = comment
         refuse_order.save()
         return Response(
@@ -92,7 +93,7 @@ class CompleteOrderView(APIView):
             return Response({'error': 'Заказ не найден'},
                             status=status.HTTP_404_NOT_FOUND)
         if order.driver != driver:
-            return Response({'error': 'Вы не можете завершить не свой заказ'},
+            return Response({'error': 'Вы не можете завершить не свой заказ!'},
                             status=status.HTTP_400_BAD_REQUEST)
         order.status = 'complete'
         order.save()
