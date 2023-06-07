@@ -8,7 +8,7 @@ class UserManager(BaseUserManager):
         if not phone:
             raise ValueError('Поле телефон должно быть задано.')
         if not car_number:
-            raise ValueError('Поле гос. номера должно быть задано.')
+            car_number = None
         user = self.model(phone=phone, car_number=car_number,
                           **extra_fields)
         user.set_password(password)
