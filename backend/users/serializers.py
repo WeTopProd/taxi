@@ -9,6 +9,7 @@ class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         fields = (
             'id',
+            'user_type',
             'phone',
             'first_name',
             'car_number',
@@ -23,6 +24,7 @@ class UserSerializer(UserSerializer):
         ref_name = 'CustomUserSerializer'
         fields = (
             'id',
+            'user_type',
             'phone',
             'first_name',
             'car_number',
