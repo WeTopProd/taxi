@@ -13,7 +13,7 @@ RU_NUMBER = (r'^[АВЕКМНОРСТУХABEKMHOPCTYX]'
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     USER_TYPES = (
-        ('bartender', 'Бармен'),
+        ('barman', 'Бармен'),
         ('dispatcher', 'Диспетчер'),
         ('driver', 'Водитель')
     )
