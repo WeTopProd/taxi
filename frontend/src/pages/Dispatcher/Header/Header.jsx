@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 import Notice from '../Notice/Notice';
 import mainLogo from '../../../assets/img/logo-franc.png';
 import AddCar from '../AddCar/AddCar';
-import Orders from '../Orders/Orders';
+import OrdersHistory from '../OrdersHistory/OrdersHistory';
 
 const Header = () => {
   return (
@@ -11,7 +11,7 @@ const Header = () => {
       <img className={styles.logo} src={mainLogo} alt={'logo'} />
       <div className={styles.btns}>
         <AddCar />
-        <Orders />
+        <OrdersHistory />
         <Notice />
       </div>
     </header>

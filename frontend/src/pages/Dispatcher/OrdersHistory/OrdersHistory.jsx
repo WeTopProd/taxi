@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './Orders.module.scss';
+import styles from './OrdersHistory.module.scss';
 import cx from 'classnames';
 import { useOnClickOutside } from '../../../helpers/hooks';
 import { ORDERS_NAMES } from '../../../helpers/dictionaries';
 import { fetchOrdersByPage } from '../../../services/orderService';
 
-const Orders = () => {
+const OrdersHistory = () => {
   const [isOpenOrders, setIsOpenOrders] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -112,4 +112,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default OrdersHistory;
