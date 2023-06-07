@@ -12,13 +12,22 @@ RU_NUMBER = (r'^[АВЕКМНОРСТУХABEKMHOPCTYX]'
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    USER_TYPES = (
+        ('bartender', 'Бармен'),
+        ('dispatcher', 'Диспетчер'),
+        ('driver', 'Водитель')
+    )
+
     STATUS_DRIVER = (
         ('free', 'Свободен'),
         ('busy', 'Занят'),
     )
+
     car_number = models.CharField(
         max_length=15,
         verbose_name='Гос. номер машины',
+        blank=True,
+        null=True,
         validators=[
             RegexValidator(
                 regex=RU_NUMBER,
@@ -40,7 +49,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name='Статус водителя',
         max_length=30,
         choices=STATUS_DRIVER,
-        default='busy'
+        default='busy',
+        blank=True,
+        null=True,
+    )
+    user_type = models.CharField(
+        verbose_name='Тип пользователя',
+        max_length=20,
+        choices=USER_TYPES
     )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -49,12 +65,19 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'phone'
 
     class Meta:
-        verbose_name = 'Водитель'
-        verbose_name_plural = 'Водители'
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
         ordering = ('status',)
 
     def __str__(self):
         return self.first_name
+
+    def save(self, *args, **kwargs):
+        if self.user_type != 'driver':
+            self.status = None
+            self.car_number = None
+
+        super().save(*args, **kwargs)
 
 
 Driver = CustomUser
