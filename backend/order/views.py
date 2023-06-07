@@ -95,6 +95,8 @@ class CompleteOrderView(APIView):
                             status=status.HTTP_400_BAD_REQUEST)
         order.status = 'complete'
         order.save()
+        driver.status = 'free'
+        driver.save()
         return Response(
             {'message': f'Заказ {order_id} завершен'},
             status=status.HTTP_200_OK
