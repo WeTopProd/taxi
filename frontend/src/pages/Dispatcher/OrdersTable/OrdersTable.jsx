@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './OrdersNew.module.scss';
+import styles from './OrdersTable.module.scss';
 import { useDispatcherContext } from '../DispatcherContext';
 import { ORDERS_NAMES } from '../../../helpers/dictionaries';
 import cx from 'classnames';
 
-const OrdersNew = () => {
-  const { newOrders, isLoadingOrders } = useDispatcherContext();
+const OrdersTable = () => {
+  const { ordersAll, isLoadingOrders } = useDispatcherContext();
 
   return (
     <>
@@ -26,7 +26,7 @@ const OrdersNew = () => {
                 <td>Заказы не загружены</td>
               </tr>
             ) : (
-              newOrders.map((orderItem, index) => (
+              ordersAll.map((orderItem, index) => (
                 <tr
                   key={index}
                   className={
@@ -49,4 +49,4 @@ const OrdersNew = () => {
   );
 };
 
-export default OrdersNew;
+export default OrdersTable;

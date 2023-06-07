@@ -1,14 +1,10 @@
 import React, { createContext, useContext } from 'react';
-import {
-  fetchNewOrders,
-  fetchOrdersByPage,
-  QueryNewOrders,
-} from '../../services/orderService';
+import { fetchOrdersByPage } from '../../services/orderService';
 import { QueryCars } from '../../services/userService';
 import { useQuery } from '@tanstack/react-query';
 
 const initialValue = {
-  newOrders: [],
+  ordersAll: [],
   isLoading: true,
   carsList: [],
   isLoadingCars: true,
@@ -28,7 +24,7 @@ export const DispatcherProvider = ({ children }) => {
       },
     });
 
-  const { data: newOrders = [], isLoading: isLoadingOrders = true } =
+  const { data: ordersAll = [], isLoading: isLoadingOrders = true } =
     QueryOrdersByPage(3000);
 
   const { data: carsList = [], isLoading: isLoadingCars = true } =
@@ -36,7 +32,12 @@ export const DispatcherProvider = ({ children }) => {
 
   return (
     <Context.Provider
-      value={{ newOrders, isLoadingOrders, carsList, isLoadingCars }}>
+      value={{
+        ordersAll: ordersAll,
+        isLoadingOrders,
+        carsList,
+        isLoadingCars,
+      }}>
       {children}
     </Context.Provider>
   );

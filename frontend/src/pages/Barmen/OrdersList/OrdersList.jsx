@@ -1,7 +1,5 @@
 import React from 'react';
-import { fetchOrdersByPage } from '../../../services/orderService';
 import Order from '../Order/Order';
-import { useQuery } from '@tanstack/react-query';
 import styles from './OrdersList.module.scss';
 
 const OrdersList = ({ orders }) => {

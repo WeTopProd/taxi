@@ -7,11 +7,14 @@ import { useDispatcherContext } from '../DispatcherContext';
 
 const Notice = () => {
   const [notice, setNotice] = useState('');
-  const { newOrders } = useDispatcherContext();
+  const { ordersAll } = useDispatcherContext();
+
+  const handlerOrderFilterByNew = (orders) => orders.status === 'new';
+  const ordersNewByFilter = ordersAll.filter(handlerOrderFilterByNew);
 
   useEffect(() => {
-    setNotice(newOrders.length);
-  }, [newOrders]);
+    setNotice(ordersNewByFilter.length);
+  }, [ordersNewByFilter]);
 
   return (
     <>

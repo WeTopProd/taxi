@@ -1,9 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import {
-  fetchNewOrders,
-  fetchOrdersByDriver,
-  QueryNewOrders,
-} from '../../services/orderService';
+import React, { createContext, useContext, useState } from 'react';
+import { fetchOrdersByDriver } from '../../services/orderService';
 import { useQuery } from '@tanstack/react-query';
 
 const initialValue = {

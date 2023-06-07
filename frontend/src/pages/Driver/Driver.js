@@ -2,12 +2,10 @@ import styles from './Driver.module.scss';
 import Header from '../../components/Header/Header';
 import DriverStatus from './DriverStatus/DriverStatus';
 import DriverPopup from './DriverPopup/DriverPopup';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import changeMeta from '../../helpers/changeMeta';
 import { DriverProvider, useDriverContext } from './DriverContext';
 import { getDriverInfoByToken } from '../../services/userService';
-import { useQuery } from '@tanstack/react-query';
-import { fetchOrdersByDriver } from '../../services/orderService';
 
 const PAGE_TITLE = 'Водитель - "БКФ Такси"';
 const PAGE_FAVICON = '/favicon_driver.ico';
@@ -23,7 +21,6 @@ function DriverContainer() {
 function Driver() {
   const {
     driverOrders,
-    carId,
     setCarId,
     setCarNumber,
     setDriverName,

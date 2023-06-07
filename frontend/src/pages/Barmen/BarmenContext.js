@@ -1,7 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
 import { QueryCars } from '../../services/userService';
-import { fetchNewOrders, QueryNewOrders } from '../../services/orderService';
-import { useQuery } from '@tanstack/react-query';
 
 const initialValue = {
   address: '',

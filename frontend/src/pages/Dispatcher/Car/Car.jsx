@@ -10,7 +10,7 @@ import { orderAssignRequest } from '../../../services/orderService';
 
 const Car = ({ driverId, driverName, driverPhone, carNumber, status }) => {
   const [carPopupIsOpen, setCarPopupIsOpen] = useState(false);
-  const { newOrders } = useDispatcherContext();
+  const { ordersAll } = useDispatcherContext();
 
   const popupOrdersRef = useRef(null);
   const openNewOrdersRef = useRef(null);
@@ -26,7 +26,7 @@ const Car = ({ driverId, driverName, driverPhone, carNumber, status }) => {
   };
 
   const orderFilterByNew = (orders) => orders.status === 'new';
-  const ordersFilter = newOrders.filter(orderFilterByNew);
+  const ordersFilter = ordersAll.filter(orderFilterByNew);
 
   return (
     <div

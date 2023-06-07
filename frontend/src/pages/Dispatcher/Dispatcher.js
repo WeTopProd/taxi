@@ -2,7 +2,7 @@ import styles from './Dispatcher.module.scss';
 import Header from './Header/Header';
 import { useEffect } from 'react';
 import changeMeta from '../../helpers/changeMeta';
-import OrdersNew from './OrdersNew/OrdersNew';
+import OrdersTable from './OrdersTable/OrdersTable';
 import { DispatcherProvider } from './DispatcherContext';
 import CarsList from './CarsList/CarsList';
 
@@ -20,7 +20,7 @@ function Dispatcher() {
           <div className={styles.cars}>
             <CarsList />
           </div>
-          <OrdersNew />
+          <OrdersTable />
         </main>
       </div>
     </DispatcherProvider>
