@@ -16,13 +16,6 @@ class OrderFilter(FilterSet):
         self.filters['driver'].extra['choices'] = zip(
             drivers_id, drivers_id
         )
-        statuses = Order.objects.values_list(
-            'status',
-            flat=True
-        )
-        self.filters['status'].extra['choices'] = set(zip(
-            statuses, statuses
-        ))
 
     name = filters.CharFilter(
         lookup_expr='icontains',
@@ -41,8 +34,8 @@ class OrderFilter(FilterSet):
         lookup_expr='range'
     )
     status = filters.MultipleChoiceFilter(
-        lookup_expr='icontains',
-        field_name='status'
+        field_name='status',
+        choices=Order.STATUS_ORDER
     )
 
     class Meta:
