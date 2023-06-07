@@ -60,6 +60,7 @@ function Driver() {
                   key={index}
                   address={order.address}
                   orderId={order.id}
+                  orderStatus={order.status}
                 />
               );
             })

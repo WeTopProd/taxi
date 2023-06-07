@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './OrdersNew.module.scss';
 import { useDispatcherContext } from '../DispatcherContext';
 import { ORDERS_NAMES } from '../../../helpers/dictionaries';
+import cx from 'classnames';
 
 const OrdersNew = () => {
   const { newOrders, isLoadingOrders } = useDispatcherContext();
@@ -22,16 +23,20 @@ const OrdersNew = () => {
           <tbody>
             {isLoadingOrders ? (
               <tr>
-                <td>Нет новых заказов</td>
+                <td>Заказы не загружены</td>
               </tr>
             ) : (
               newOrders.map((orderItem, index) => (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  className={
+                    orderItem.status === 'new' ? styles.orders_status__new : ''
+                  }>
                   <td className={styles.orders_id}>{orderItem.id}</td>
                   <td className={styles.orders_name}>{orderItem.name}</td>
                   <td className={styles.orders_phone}>{orderItem.phone}</td>
                   <td className={styles.orders_address}>{orderItem.address}</td>
-                  <td className={styles.orders_status}>
+                  <td className={cx(styles.orders_status)}>
                     {ORDERS_NAMES[orderItem.status]}
                   </td>
                 </tr>

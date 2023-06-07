@@ -22,12 +22,10 @@ export const DriverProvider = ({ children }) => {
   const [driverPhone, setDriverPhone] = useState('');
   const [driverStatus, setDriverStatus] = useState('занят');
 
-  const timeRefreshOrders = driverStatus === 'свободен' ? 1000 : 0;
-
   const { data: driverOrders = [] } = useQuery({
     queryFn: () => fetchOrdersByDriver(carId).then((res) => res.data.results),
     queryKey: [carId],
-    refetchInterval: timeRefreshOrders,
+    refetchInterval: 3000,
     retry: 5,
     onError: (error) => {
       console.error(error);

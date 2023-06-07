@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { HOST } from './api';
 
 const BASE_URL_ORDERS = `${HOST}/orders/`;
+const BASE_URL_ORDER_ASSIGN = `${HOST}/assign-order/`;
 
 export async function fetchOrdersByPage(page = 1) {
   return await axios.get(BASE_URL_ORDERS, {
@@ -13,11 +14,9 @@ export async function fetchOrdersByPage(page = 1) {
 }
 
 export const fetchOrdersByDriver = (carId) => {
-  return axios.get(BASE_URL_ORDERS, {
-    params: {
-      driver: carId,
-    },
-  });
+  return axios.get(
+    BASE_URL_ORDERS + `?status=assigned&status=confirmed&driver=${carId}`,
+  );
 };
 
 export const fetchNewOrders = (status = '') =>
@@ -50,8 +49,6 @@ export async function changeOrderStatus(order_id, order_status) {
   });
 }
 
-export async function orderRequestByDispatcher(order_id, driver_id) {
-  return await axios.patch(BASE_URL_ORDERS + `${order_id}/`, {
-    driver: driver_id,
-  });
+export async function orderAssignRequest(order_id, driver_id) {
+  return await axios.post(BASE_URL_ORDER_ASSIGN + `${order_id}/${driver_id}/`);
 }

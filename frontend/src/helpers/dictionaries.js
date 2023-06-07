@@ -1,5 +1,7 @@
 export const ORDERS_NAMES = {
   new: 'новый',
+  assigned: 'назначен',
+  refused: 'отклонен',
   confirmed: 'подтвержден',
   canceled: 'отменен',
   complete: 'завершен',

@@ -6,10 +6,7 @@ import cx from 'classnames';
 import { STATUS_CAR_NAMES } from '../../../helpers/dictionaries';
 import { useDispatcherContext } from '../DispatcherContext';
 import { useOnClickOutside } from '../../../helpers/hooks';
-import {
-  changeDriverStatus,
-  orderRequestByDispatcher,
-} from '../../../services/orderService';
+import { orderAssignRequest } from '../../../services/orderService';
 
 const Car = ({ driverId, driverName, driverPhone, carNumber, status }) => {
   const [carPopupIsOpen, setCarPopupIsOpen] = useState(false);
@@ -21,11 +18,16 @@ const Car = ({ driverId, driverName, driverPhone, carNumber, status }) => {
   useOnClickOutside(popupOrdersRef, openNewOrdersRef, () =>
     setCarPopupIsOpen(false),
   );
+
   const handlerClickOrder = (orderId, driverId) => {
-    orderRequestByDispatcher(orderId, driverId).then(() =>
-      alert(`Заказ N${orderId} отправлен водителю`),
+    orderAssignRequest(orderId, driverId).then((res) =>
+      alert(res.data.message),
     );
   };
+
+  const orderFilterByNew = (orders) => orders.status === 'new';
+  const ordersFilter = newOrders.filter(orderFilterByNew);
+
   return (
     <div
       ref={openNewOrdersRef}
@@ -35,7 +37,7 @@ const Car = ({ driverId, driverName, driverPhone, carNumber, status }) => {
         <div ref={popupOrdersRef} className={styles.carPopup}>
           <h3 className={styles.carPopup_title}>Назначить заказ</h3>
           <ul className={styles.carPopup_list}>
-            {newOrders.map((order, index) => (
+            {ordersFilter.map((order, index) => (
               <li
                 onClick={() => handlerClickOrder(order.id, driverId)}
                 className={styles.carPopup_item}

@@ -7,13 +7,13 @@ import { submitOrder } from '../../../services/orderService';
 const Form = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [price, setPrice] = useState('');
-  const { address, setAddress } = useBarmenContext();
+  const { address, setAddress, price, setPrice } = useBarmenContext();
 
   const clearForm = () => {
     setName('');
     setPhone('');
     setAddress('');
+    setPrice('');
   };
 
   const sendRequest = (data) => {
@@ -33,6 +33,7 @@ const Form = () => {
       name: name,
       phone: phone,
       address: address,
+      price: price,
     });
   };
 
@@ -65,27 +66,27 @@ const Form = () => {
         id="address"
         required={true}
       />
-      <div className={styles.form_wrapper}>
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          placeholder={'Цена поездки'}
-          name="price"
-          id="price"
-          required={true}
-        />
-        <div className={styles.form__btns}>
-          <button className={styles.btn} type={'submit'}>
-            Отправить запрос
-          </button>
-          <button
-            className={cx(styles.btn, styles.btn_reset)}
-            type={'reset'}
-            onClick={clearForm}>
-            Очистить
-          </button>
-        </div>
+      <input
+        className={styles.input_price}
+        type="text"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        placeholder={'Цена поездки'}
+        name="price"
+        id="price"
+        required={true}
+        readOnly={true}
+      />
+      <div className={styles.form__btns}>
+        <button className={styles.btn} type={'submit'}>
+          Отправить запрос
+        </button>
+        <button
+          className={cx(styles.btn, styles.btn_reset)}
+          type={'reset'}
+          onClick={clearForm}>
+          Очистить
+        </button>
       </div>
     </form>
   );

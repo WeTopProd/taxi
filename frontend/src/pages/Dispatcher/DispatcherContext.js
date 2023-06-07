@@ -1,6 +1,11 @@
 import React, { createContext, useContext } from 'react';
-import { QueryNewOrders } from '../../services/orderService';
+import {
+  fetchNewOrders,
+  fetchOrdersByPage,
+  QueryNewOrders,
+} from '../../services/orderService';
 import { QueryCars } from '../../services/userService';
+import { useQuery } from '@tanstack/react-query';
 
 const initialValue = {
   newOrders: [],
@@ -12,8 +17,19 @@ const initialValue = {
 const Context = createContext(initialValue);
 
 export const DispatcherProvider = ({ children }) => {
+  const QueryOrdersByPage = (time) =>
+    useQuery({
+      queryFn: () => fetchOrdersByPage().then((res) => res.data?.results),
+      queryKey: ['ordersDispatcher1'],
+      refetchInterval: time,
+      retry: 5,
+      onError: (error) => {
+        console.error(error);
+      },
+    });
+
   const { data: newOrders = [], isLoading: isLoadingOrders = true } =
-    QueryNewOrders(3000);
+    QueryOrdersByPage(3000);
 
   const { data: carsList = [], isLoading: isLoadingCars = true } =
     QueryCars(3000);
