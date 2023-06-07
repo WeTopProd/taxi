@@ -16,7 +16,6 @@ class OrderFilter(FilterSet):
         self.filters['driver'].extra['choices'] = zip(
             drivers_id, drivers_id
         )
-
     name = filters.CharFilter(
         lookup_expr='icontains',
         field_name='name'
