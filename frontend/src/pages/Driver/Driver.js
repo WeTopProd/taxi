@@ -5,7 +5,6 @@ import DriverPopup from './DriverPopup/DriverPopup';
 import { useEffect } from 'react';
 import changeMeta from '../../helpers/changeMeta';
 import { DriverProvider, useDriverContext } from './DriverContext';
-import { getDriverInfoByToken } from '../../services/userService';
 
 const PAGE_TITLE = 'Водитель - "БКФ Такси"';
 const PAGE_FAVICON = '/favicon_driver.ico';
@@ -19,31 +18,11 @@ function DriverContainer() {
 }
 
 function Driver() {
-  const {
-    driverOrders,
-    setCarId,
-    setCarNumber,
-    setDriverName,
-    setDriverPhone,
-    setDriverStatus,
-  } = useDriverContext();
+  const { driverOrders } = useDriverContext();
 
   useEffect(() => {
     changeMeta(PAGE_TITLE, PAGE_FAVICON);
-
-    getDriverInfoByToken()
-      .then((res) => {
-        setCarId(res.data.id);
-        setCarNumber(res.data.car_number);
-        setDriverName(res.data.first_name);
-        setDriverPhone(res.data.phone);
-        setDriverStatus(res.data.status);
-      })
-      .catch((err) => {
-        alert('Ошибка получения данных');
-        console.log(err);
-      });
-  });
+  }, []);
 
   return (
     <div className={styles.container}>

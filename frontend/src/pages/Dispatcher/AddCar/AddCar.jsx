@@ -31,7 +31,7 @@ const AddCar = () => {
 
   const sendRequestAddCar = (data) => {
     submitAddCar(data)
-      .then(function (response) {
+      .then(() => {
         alert('Новая машина добавлена успешно');
         clearForm();
       })
@@ -43,6 +43,7 @@ const AddCar = () => {
   const handleAddCarSubmit = (e) => {
     e.preventDefault();
     sendRequestAddCar({
+      user_type: 'driver',
       phone: driverPhone,
       first_name: driverName,
       car_number: carNumber,

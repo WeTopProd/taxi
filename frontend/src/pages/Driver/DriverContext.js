@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { fetchOrdersByDriver } from '../../services/orderService';
 import { useQuery } from '@tanstack/react-query';
+import { getUserInfoByToken } from '../../services/userService';
 
 const initialValue = {
   driverOrders: [],
@@ -28,6 +29,21 @@ export const DriverProvider = ({ children }) => {
     },
   });
 
+  useEffect(() => {
+    getUserInfoByToken()
+      .then((res) => {
+        setCarId(res.data.id);
+        setCarNumber(res.data.car_number);
+        setDriverName(res.data.first_name);
+        setDriverPhone(res.data.phone);
+        setDriverStatus(res.data.status);
+      })
+      .catch((err) => {
+        alert('Ошибка получения данных');
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Context.Provider
       value={{
@@ -39,7 +55,6 @@ export const DriverProvider = ({ children }) => {
         driverName,
         setDriverName,
         driverPhone,
-        setDriverPhone,
         driverStatus,
         setDriverStatus,
       }}>

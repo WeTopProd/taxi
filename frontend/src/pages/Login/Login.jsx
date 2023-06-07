@@ -5,6 +5,7 @@ import { routes } from '../../helpers/routes';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { loginQuery } from '../../services/authService';
+import { getUserInfoByToken } from '../../services/userService';
 
 function Login() {
   const [inputPhone, setInputPhone] = useState('');
@@ -12,10 +13,36 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const onSuccessLogin = (res) => {
+  // const onSuccessLogin = (res) => {
+  //   const token = res?.data?.auth_token;
+  //   setToken(token);
+  //   getUserInfoByToken()
+  //     .then(({ data }) => {
+  //       const userType = data.user_type;
+  //       if (userType === 'dispatcher') navigate(routes.dispatcher);
+  //       if (userType === 'bartender') navigate(routes.barmen);
+  //       if (userType === 'driver') navigate(routes.driver);
+  //     })
+  //     .catch((err) => {
+  //       alert('Ошибка получения данных');
+  //       console.log(err);
+  //     });
+  // };
+
+  const onSuccessLogin = async (res) => {
     const token = res?.data?.auth_token;
     setToken(token);
-    navigate(routes.driver);
+    try {
+      const { data } = await getUserInfoByToken();
+      const userType = data.user_type;
+
+      if (userType === 'dispatcher') navigate(routes.dispatcher);
+      if (userType === 'bartender') navigate(routes.barmen);
+      if (userType === 'driver') navigate(routes.driver);
+    } catch (err) {
+      alert('Ошибка получения данных');
+      console.log(err);
+    }
   };
 
   const onSubmitLogin = (e) => {
