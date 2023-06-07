@@ -13,4 +13,4 @@ RUN npm run build
 CMD cp -r build result_build
 
 
-CMD ["npm", "serve"]
+CMD ["npm", "run", "serve"]
