@@ -2,11 +2,7 @@ import axios from 'axios';
 import { getToken } from './localStorageService';
 import { routes } from '../helpers/routes';
 
-// export const HOST = 'http://127.0.0.1:8000/api';
-// export const HOST = 'http://37.140.195.3:8001/api';
-export const HOST = process.env.REACT_APP_HOST;
-
-console.log('process.env.REACT_APP_HOST ', process.env.REACT_APP_HOST);
+export const HOST = process.env.REACT_APP_API_URL;
 
 export const $api = axios.create({
   baseURL: HOST,

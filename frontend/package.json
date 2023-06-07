@@ -21,10 +21,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "REACT_APP_HOST=http://127.0.0.1:8000/api react-scripts start",
-    "build": "REACT_APP_HOST=http://37.140.195.3:8001/api PORT=3001 react-scripts build",
-    "test": "REACT_APP_HOST=http://127.0.0.1:8000/api react-scripts test",
-    "eject": "REACT_APP_HOST=http://127.0.0.1:8000/api react-scripts eject",
+    "start": "REACT_APP_API_URL=http://127.0.0.1:8000/api react-scripts start",
+    "build": "REACT_APP_API_URL=http://37.140.195.3:8001/api react-scripts build",
+    "test": "REACT_APP_API_URL=http://127.0.0.1:8000/api react-scripts test",
+    "eject": "REACT_APP_API_URL=http://127.0.0.1:8000/api react-scripts eject",
     "serve": "serve -s build -l 3001"
   },
   "eslintConfig": {
