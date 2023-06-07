@@ -10,6 +10,7 @@ class DriverAdmin(admin.ModelAdmin):
         'first_name',
         'car_number'
     )
+
     ordering = ('first_name', )
     search_fields = ('phone', 'car_number', 'first_name')
     list_filter = ('phone', 'car_number')
