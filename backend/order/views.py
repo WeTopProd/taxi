@@ -27,15 +27,6 @@ class TakeOrderView(APIView):
         except Order.DoesNotExist:
             return Response({'error': 'Заказ не найден'},
                             status=status.HTTP_404_NOT_FOUND)
-        if order.status != 'new':
-            return Response({'error': 'Заказ уже занят или подтвержден'},
-                            status=status.HTTP_400_BAD_REQUEST)
-        if driver.status != 'free':
-            return Response({'error': 'Водитель уже занят'},
-                            status=status.HTTP_400_BAD_REQUEST)
-        if order.driver is not None:
-            return Response({'error': 'Заказ уже занят другим водителем'},
-                            status=status.HTTP_400_BAD_REQUEST)
         order.status = 'confirmed'
         order.save()
         driver.status = 'busy'
