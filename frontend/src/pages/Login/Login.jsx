@@ -37,7 +37,7 @@ function Login() {
       const userType = data.user_type;
 
       if (userType === 'dispatcher') navigate(routes.dispatcher);
-      if (userType === 'bartender') navigate(routes.barmen);
+      if (userType === 'barman') navigate(routes.barmen);
       if (userType === 'driver') navigate(routes.driver);
     } catch (err) {
       alert('Ошибка получения данных');
