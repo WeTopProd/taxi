@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-amt#&x4wa&%g36xxaf&hny2lufnmwmi_uvqn=bbr&9(fl2a3sa'
 
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     ALLOWED_HOSTS = [
@@ -134,12 +134,7 @@ REST_FRAMEWORK = {
 }
 
 CORS_URLS_REGEX = r'^/api/.*$'
-if DEBUG:
-    CORS_ORIGIN_ALLOW_ALL = True
-else:
-    CORS_ALLOWED_ORIGINS = [
-        'http://37.140.195.3:3001',
-    ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 DJOSER = {
