@@ -1,10 +1,10 @@
-import styles from './Barmen.module.scss';
+import styles from './Barman.module.scss';
 import Header from './Header/Header';
 import Form from './Form/Form';
 import Map from '../../components/Map/Map';
 import React, { useEffect } from 'react';
 import changeMeta from '../../helpers/changeMeta';
-import { BarmenProvider } from './BarmenContext';
+import { BarmanProvider } from './BarmanContext';
 import OrdersList from './OrdersList/OrdersList';
 import { useQuery } from '@tanstack/react-query';
 import { fetchOrdersByPage } from '../../services/orderService';
@@ -12,7 +12,7 @@ import { fetchOrdersByPage } from '../../services/orderService';
 const PAGE_TITLE = 'Бармен - "БКФ Такси"';
 const PAGE_FAVICON = '/favicon_barmen.ico';
 
-function Barmen() {
+function Barman() {
   useEffect(() => changeMeta(PAGE_TITLE, PAGE_FAVICON), []);
 
   const { data: orders = [] } = useQuery({
@@ -21,13 +21,13 @@ function Barmen() {
     refetchInterval: 3000,
     retry: 5,
     onError: (error) => {
-      alert('Не удалось загрузить список заказов');
+      alert(`Не удалось загрузить список заказов ${error}`);
     },
   });
 
   return (
     <div className={styles.container_barmen}>
-      <BarmenProvider>
+      <BarmanProvider>
         <Header />
         <main className={styles.main}>
           <div className={styles.left}>
@@ -46,9 +46,9 @@ function Barmen() {
             <Map />
           </div>
         </main>
-      </BarmenProvider>
+      </BarmanProvider>
     </div>
   );
 }
 
-export default Barmen;
+export default Barman;

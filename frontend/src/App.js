@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.scss';
 
 import Dispatcher from './pages/Dispatcher/Dispatcher';
-import Barmen from './pages/Barmen/Barmen';
+import Barman from './pages/Barman/Barman';
 import { routes } from './helpers/routes';
 import Login from './pages/Login/Login';
 import DriverContainer from './pages/Driver/Driver';
@@ -19,7 +19,7 @@ function App() {
         <Route path="*" element={<Login />} />
         <Route path={routes.login} element={<Login />} />
         <Route path={routes.dispatcher} element={<Dispatcher />} />
-        <Route path={routes.barmen} element={<Barmen />} />
+        <Route path={routes.barman} element={<Barman />} />
         <Route path={routes.driver} element={<DriverContainer />} />
       </Routes>
     </QueryClientProvider>

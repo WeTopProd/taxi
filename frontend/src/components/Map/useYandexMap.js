@@ -1,12 +1,23 @@
 /* eslint-disable no-undef */
 import { useEffect } from 'react';
-import * as POLYGONS from './polygons.js';
-import { useBarmenContext } from '../../pages/Barmen/BarmenContext';
+import { useBarmanContext } from '../../pages/Barman/BarmanContext';
+import { BCF_INFO } from './BCF_INFO';
 
 let yandexMapInitailized = false;
 
+const zonesPrices = BCF_INFO.zonePrices;
+const polygons = BCF_INFO.POLYGONS;
+const { map_center, map_address, map_city } = BCF_INFO;
+
 export const useYandexMap = () => {
-  const { setAddress } = useBarmenContext();
+  // const poly = polygons.POLYGON_ZONE3.map((zone) => {
+  //   return zone.reverse();
+  // });
+  //
+  // const json = JSON.stringify(poly);
+  // console.log(json);
+
+  const { setAddress } = useBarmanContext();
 
   useEffect(() => {
     if (yandexMapInitailized === true) {
@@ -21,7 +32,7 @@ export const useYandexMap = () => {
       const myMap = new ymaps.Map(
         'map',
         {
-          center: [55.75829427489275, 37.83995274502565],
+          center: map_center,
           zoom: 11,
           controls: ['routePanelControl'],
         },
@@ -31,7 +42,6 @@ export const useYandexMap = () => {
       );
 
       const control = myMap.controls.get('routePanelControl');
-      let city = 'Москва';
       // Зададим состояние панели для построения машрутов.
       control.routePanel.state.set({
         // Тип маршрутизации.
@@ -42,7 +52,7 @@ export const useYandexMap = () => {
         // Выключим возможность задавать пункт отправления в поле ввода.
         fromEnabled: false,
         // Адрес или координаты пункта отправления.
-        from: `${city}, улица Сталеваров, 14к1`,
+        from: `${map_city}, ${map_address}`,
         // Включим возможность задавать пункт назначения в поле ввода.
         toEnabled: true,
         // Адрес или координаты пункта назначения.
@@ -82,10 +92,10 @@ export const useYandexMap = () => {
         [
           // Указываем координаты вершин многоугольника.
           // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_250,
+          polygons.POLYGON_ZONE1,
         ],
         {
-          hintContent: '250 руб.',
+          hintContent: `${zonesPrices[0]} руб.`,
         },
         {
           // Задаем опции геообъекта.
@@ -106,10 +116,10 @@ export const useYandexMap = () => {
         [
           // Указываем координаты вершин многоугольника.
           // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_350,
+          polygons.POLYGON_ZONE2,
         ],
         {
-          hintContent: '350 руб.',
+          hintContent: `${zonesPrices[1]} руб.`,
         },
         {
           // Задаем опции геообъекта.
@@ -130,10 +140,10 @@ export const useYandexMap = () => {
         [
           // Указываем координаты вершин многоугольника.
           // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_500,
+          polygons.POLYGON_ZONE3,
         ],
         {
-          hintContent: '500 руб.',
+          hintContent: `${zonesPrices[2]} руб.`,
         },
         {
           // Задаем опции геообъекта.
@@ -150,149 +160,149 @@ export const useYandexMap = () => {
 
       myMap.geoObjects.add(myPolygon);
 
-      myPolygon = new ymaps.Polygon(
-        [
-          // Указываем координаты вершин многоугольника.
-          // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_750,
-        ],
-        {
-          hintContent: '750 руб.',
-        },
-        {
-          // Задаем опции геообъекта.
-          // Цвет заливки.
-          fillColor: 'rgb(243, 113, 209)',
-          // Цвет обводки.
-          strokeColor: 'rgb(243, 113, 209)',
-          // Общая прозрачность (как для заливки, так и для обводки).
-          opacity: 0.5,
-          // Ширина обводки.
-          strokeWidth: 2,
-        },
-      );
-
-      myMap.geoObjects.add(myPolygon);
-
-      myPolygon = new ymaps.Polygon(
-        [
-          // Указываем координаты вершин многоугольника.
-          // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_1000_1,
-        ],
-        {
-          hintContent: '1000 руб.',
-        },
-        {
-          // Задаем опции геообъекта.
-          // Цвет заливки.
-          fillColor: 'rgb(237, 69, 67)',
-          // Цвет обводки.
-          strokeColor: 'rgb(237, 69, 67)',
-          // Общая прозрачность (как для заливки, так и для обводки).
-          opacity: 0.5,
-          // Ширина обводки.
-          strokeWidth: 2,
-        },
-      );
-
-      myMap.geoObjects.add(myPolygon);
-
-      myPolygon = new ymaps.Polygon(
-        [
-          // Указываем координаты вершин многоугольника.
-          // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_1000_2,
-        ],
-        {
-          hintContent: '1000 руб.',
-        },
-        {
-          // Задаем опции геообъекта.
-          // Цвет заливки.
-          fillColor: 'rgb(237, 69, 67)',
-          // Цвет обводки.
-          strokeColor: 'rgb(237, 69, 67)',
-          // Общая прозрачность (как для заливки, так и для обводки).
-          opacity: 0.5,
-          // Ширина обводки.
-          strokeWidth: 2,
-        },
-      );
-
-      myMap.geoObjects.add(myPolygon);
-
-      myPolygon = new ymaps.Polygon(
-        [
-          // Указываем координаты вершин многоугольника.
-          // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_1000_3,
-        ],
-        {
-          hintContent: '1000 руб.',
-        },
-        {
-          // Задаем опции геообъекта.
-          // Цвет заливки.
-          fillColor: 'rgb(237, 69, 67)',
-          // Цвет обводки.
-          strokeColor: 'rgb(237, 69, 67)',
-          // Общая прозрачность (как для заливки, так и для обводки).
-          opacity: 0.5,
-          // Ширина обводки.
-          strokeWidth: 2,
-        },
-      );
-
-      myMap.geoObjects.add(myPolygon);
-
-      myPolygon = new ymaps.Polygon(
-        [
-          // Указываем координаты вершин многоугольника.
-          // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_1000_4,
-        ],
-        {
-          hintContent: '1000 руб.',
-        },
-        {
-          // Задаем опции геообъекта.
-          // Цвет заливки.
-          fillColor: 'rgb(237, 69, 67)',
-          // Цвет обводки.
-          strokeColor: 'rgb(237, 69, 67)',
-          // Общая прозрачность (как для заливки, так и для обводки).
-          opacity: 0.5,
-          // Ширина обводки.
-          strokeWidth: 2,
-        },
-      );
-
-      myMap.geoObjects.add(myPolygon);
-
-      myPolygon = new ymaps.Polygon(
-        [
-          // Указываем координаты вершин многоугольника.
-          // Координаты вершин внешнего контура.
-          POLYGONS.POLYGON_1000_5,
-        ],
-        {
-          hintContent: '1000 руб.',
-        },
-        {
-          // Задаем опции геообъекта.
-          // Цвет заливки.
-          fillColor: 'rgb(237, 69, 67)',
-          // Цвет обводки.
-          strokeColor: 'rgb(237, 69, 67)',
-          // Общая прозрачность (как для заливки, так и для обводки).
-          opacity: 0.5,
-          // Ширина обводки.
-          strokeWidth: 2,
-        },
-      );
-
-      myMap.geoObjects.add(myPolygon);
+      // myPolygon = new ymaps.Polygon(
+      //   [
+      //     // Указываем координаты вершин многоугольника.
+      //     // Координаты вершин внешнего контура.
+      //     polygons.POLYGON_ZONE4,
+      //   ],
+      //   {
+      //     hintContent: `${zonesPrices[3]} руб.`,
+      //   },
+      //   {
+      //     // Задаем опции геообъекта.
+      //     // Цвет заливки.
+      //     fillColor: 'rgb(243, 113, 209)',
+      //     // Цвет обводки.
+      //     strokeColor: 'rgb(243, 113, 209)',
+      //     // Общая прозрачность (как для заливки, так и для обводки).
+      //     opacity: 0.5,
+      //     // Ширина обводки.
+      //     strokeWidth: 2,
+      //   },
+      // );
+      //
+      // myMap.geoObjects.add(myPolygon);
+      //
+      // myPolygon = new ymaps.Polygon(
+      //   [
+      //     // Указываем координаты вершин многоугольника.
+      //     // Координаты вершин внешнего контура.
+      //     polygons.POLYGON_ZONE5_1,
+      //   ],
+      //   {
+      //     hintContent: `${zonesPrices[4]} руб.`,
+      //   },
+      //   {
+      //     // Задаем опции геообъекта.
+      //     // Цвет заливки.
+      //     fillColor: 'rgb(237, 69, 67)',
+      //     // Цвет обводки.
+      //     strokeColor: 'rgb(237, 69, 67)',
+      //     // Общая прозрачность (как для заливки, так и для обводки).
+      //     opacity: 0.5,
+      //     // Ширина обводки.
+      //     strokeWidth: 2,
+      //   },
+      // );
+      //
+      // myMap.geoObjects.add(myPolygon);
+      //
+      // myPolygon = new ymaps.Polygon(
+      //   [
+      //     // Указываем координаты вершин многоугольника.
+      //     // Координаты вершин внешнего контура.
+      //     polygons.POLYGON_ZONE5_2,
+      //   ],
+      //   {
+      //     hintContent: `${zonesPrices[4]} руб.`,
+      //   },
+      //   {
+      //     // Задаем опции геообъекта.
+      //     // Цвет заливки.
+      //     fillColor: 'rgb(237, 69, 67)',
+      //     // Цвет обводки.
+      //     strokeColor: 'rgb(237, 69, 67)',
+      //     // Общая прозрачность (как для заливки, так и для обводки).
+      //     opacity: 0.5,
+      //     // Ширина обводки.
+      //     strokeWidth: 2,
+      //   },
+      // );
+      //
+      // myMap.geoObjects.add(myPolygon);
+      //
+      // myPolygon = new ymaps.Polygon(
+      //   [
+      //     // Указываем координаты вершин многоугольника.
+      //     // Координаты вершин внешнего контура.
+      //     polygons.POLYGON_ZONE5_3,
+      //   ],
+      //   {
+      //     hintContent: `${zonesPrices[4]} руб.`,
+      //   },
+      //   {
+      //     // Задаем опции геообъекта.
+      //     // Цвет заливки.
+      //     fillColor: 'rgb(237, 69, 67)',
+      //     // Цвет обводки.
+      //     strokeColor: 'rgb(237, 69, 67)',
+      //     // Общая прозрачность (как для заливки, так и для обводки).
+      //     opacity: 0.5,
+      //     // Ширина обводки.
+      //     strokeWidth: 2,
+      //   },
+      // );
+      //
+      // myMap.geoObjects.add(myPolygon);
+      //
+      // myPolygon = new ymaps.Polygon(
+      //   [
+      //     // Указываем координаты вершин многоугольника.
+      //     // Координаты вершин внешнего контура.
+      //     polygons.POLYGON_ZONE5_4,
+      //   ],
+      //   {
+      //     hintContent: `${zonesPrices[4]} руб.`,
+      //   },
+      //   {
+      //     // Задаем опции геообъекта.
+      //     // Цвет заливки.
+      //     fillColor: 'rgb(237, 69, 67)',
+      //     // Цвет обводки.
+      //     strokeColor: 'rgb(237, 69, 67)',
+      //     // Общая прозрачность (как для заливки, так и для обводки).
+      //     opacity: 0.5,
+      //     // Ширина обводки.
+      //     strokeWidth: 2,
+      //   },
+      // );
+      //
+      // myMap.geoObjects.add(myPolygon);
+      //
+      // myPolygon = new ymaps.Polygon(
+      //   [
+      //     // Указываем координаты вершин многоугольника.
+      //     // Координаты вершин внешнего контура.
+      //     polygons.POLYGON_ZONE5_5,
+      //   ],
+      //   {
+      //     hintContent: `${zonesPrices[4]} руб.`,
+      //   },
+      //   {
+      //     // Задаем опции геообъекта.
+      //     // Цвет заливки.
+      //     fillColor: 'rgb(237, 69, 67)',
+      //     // Цвет обводки.
+      //     strokeColor: 'rgb(237, 69, 67)',
+      //     // Общая прозрачность (как для заливки, так и для обводки).
+      //     opacity: 0.5,
+      //     // Ширина обводки.
+      //     strokeWidth: 2,
+      //   },
+      // );
+      //
+      // myMap.geoObjects.add(myPolygon);
     }
   });
 };

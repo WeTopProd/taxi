@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styles from './Form.module.scss';
 import cx from 'classnames';
-import { useBarmenContext } from '../BarmenContext';
+import { useBarmanContext } from '../BarmanContext';
 import { submitOrder } from '../../../services/orderService';
 
 const Form = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const { address, setAddress, price, setPrice } = useBarmenContext();
+  const { address, setAddress, price, setPrice } = useBarmanContext();
 
   const clearForm = () => {
     setName('');
@@ -18,7 +18,7 @@ const Form = () => {
 
   const sendRequest = (data) => {
     submitOrder(data)
-      .then(function (response) {
+      .then(function () {
         alert('Заказ отправлен');
         clearForm();
       })
@@ -37,6 +37,10 @@ const Form = () => {
     });
   };
 
+  const onClickPhone = () => {
+    setPhone('+7');
+  };
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <input
@@ -51,11 +55,13 @@ const Form = () => {
       <input
         type="tel"
         value={phone}
+        onClick={onClickPhone}
         onChange={(e) => setPhone(e.target.value)}
         placeholder={'Телефон'}
         name="phone"
         id="phone"
         required={true}
+        autoComplete={'off'}
       />
       <input
         type="text"

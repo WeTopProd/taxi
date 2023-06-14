@@ -18,7 +18,7 @@ function DriverContainer() {
 }
 
 function Driver() {
-  const { driverOrders } = useDriverContext();
+  const { driverOrders, setDriverStatus } = useDriverContext();
 
   useEffect(() => {
     changeMeta(PAGE_TITLE, PAGE_FAVICON);
@@ -37,6 +37,7 @@ function Driver() {
                   address={order.address}
                   orderId={order.id}
                   orderStatus={order.status}
+                  setDriverStatus={setDriverStatus}
                 />
               );
             })

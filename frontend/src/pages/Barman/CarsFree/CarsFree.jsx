@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './CarsFree.module.scss';
 import cx from 'classnames';
 import { declOfNum } from '../../../helpers/declOfNum';
-import { useBarmenContext } from '../BarmenContext';
+import { useBarmanContext } from '../BarmanContext';
 import { countByField } from '../../../helpers/countObjects';
 import { CARS_DECL } from '../../../helpers/dictionaries';
 
 const CarsFree = () => {
-  const { carsFreeList } = useBarmenContext();
+  const { carsFreeList } = useBarmanContext();
   const carsFreeCount = countByField(carsFreeList, 'status', 'free');
 
   return (

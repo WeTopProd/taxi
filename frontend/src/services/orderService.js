@@ -13,6 +13,10 @@ export async function fetchOrdersByPage(page = 1) {
   });
 }
 
+export const fetchOrderById = (orderId) => {
+  return axios.get(BASE_URL_ORDERS + `${orderId}/`);
+};
+
 export const fetchOrdersByDriver = (carId) => {
   return axios.get(
     BASE_URL_ORDERS + `?status=assigned&status=confirmed&driver=${carId}`,

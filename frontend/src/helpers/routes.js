@@ -1,6 +1,6 @@
 export const routes = {
   login: '/login',
   driver: '/driver',
-  barmen: '/barmen',
+  barman: '/barman',
   dispatcher: '/dispatcher',
 };

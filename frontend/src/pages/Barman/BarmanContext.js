@@ -11,7 +11,7 @@ const initialValue = {
 
 const Context = createContext(initialValue);
 
-export const BarmenProvider = ({ children }) => {
+export const BarmanProvider = ({ children }) => {
   const [address, setAddress] = useState(initialValue.address);
   const [price, setPrice] = useState('');
 
@@ -25,11 +25,11 @@ export const BarmenProvider = ({ children }) => {
   );
 };
 
-export const useBarmenContext = () => {
+export const useBarmanContext = () => {
   const context = useContext(Context);
 
   if (!context) {
-    throw Error('No Barmen context found.');
+    throw Error('No Barman context found.');
   }
 
   return context;

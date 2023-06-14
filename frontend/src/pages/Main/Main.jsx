@@ -10,7 +10,7 @@ function Main() {
     <div className={styles.container}>
       <Header />
       <main className={styles.main}>
-        <Link className={styles.link} to={`./barmen`}>
+        <Link className={styles.link} to={`./barman`}>
           <img src={barmen_logo} width="150" height="150" alt="Бармен" />
           <h4>Перейти в терминал бармена</h4>
         </Link>

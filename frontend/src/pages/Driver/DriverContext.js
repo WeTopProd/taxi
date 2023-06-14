@@ -17,12 +17,12 @@ export const DriverProvider = ({ children }) => {
   const [carNumber, setCarNumber] = useState('');
   const [driverName, setDriverName] = useState('');
   const [driverPhone, setDriverPhone] = useState('');
-  const [driverStatus, setDriverStatus] = useState('занят');
+  const [driverStatus, setDriverStatus] = useState('busy');
 
   const { data: driverOrders = [] } = useQuery({
     queryFn: () => fetchOrdersByDriver(carId).then((res) => res.data.results),
     queryKey: [carId],
-    refetchInterval: 3000,
+    refetchInterval: 5000,
     retry: 5,
     onError: (error) => {
       console.error(error);

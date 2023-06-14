@@ -5,6 +5,7 @@ import mainLogo from '../../assets/img/logo-franc.png';
 import { routes } from '../../helpers/routes';
 import { useNavigate } from 'react-router-dom';
 import { logoutQuery } from '../../services/authService';
+import ButtonReload from '../../pages/Driver/ButtonReload/ButtonReload';
 
 const Header = ({ isAuth = false }) => {
   const navigate = useNavigate();
@@ -28,6 +29,9 @@ const Header = ({ isAuth = false }) => {
         src={mainLogo}
         alt={'лого'}
       />
+      <div className={styles.btn_reload}>
+        <ButtonReload />
+      </div>
       <div className={styles.btns}>
         {isAuth ? (
           <>

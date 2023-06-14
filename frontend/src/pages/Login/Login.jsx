@@ -6,6 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { loginQuery } from '../../services/authService';
 import { getUserInfoByToken } from '../../services/userService';
+import {
+  onPhoneInput,
+  onPhoneKeyDown,
+  onPhonePaste,
+} from '../../helpers/phoneMask';
 
 function Login() {
   const [inputPhone, setInputPhone] = useState('');
@@ -20,7 +25,7 @@ function Login() {
   //     .then(({ data }) => {
   //       const userType = data.user_type;
   //       if (userType === 'dispatcher') navigate(routes.dispatcher);
-  //       if (userType === 'bartender') navigate(routes.barmen);
+  //       if (userType === 'bartender') navigate(routes.barman);
   //       if (userType === 'driver') navigate(routes.driver);
   //     })
   //     .catch((err) => {
@@ -37,7 +42,7 @@ function Login() {
       const userType = data.user_type;
 
       if (userType === 'dispatcher') navigate(routes.dispatcher);
-      if (userType === 'barman') navigate(routes.barmen);
+      if (userType === 'barman') navigate(routes.barman);
       if (userType === 'driver') navigate(routes.driver);
     } catch (err) {
       alert('Ошибка получения данных');
@@ -66,10 +71,15 @@ function Login() {
         <h2>Вход в личный кабинет</h2>
         <form onSubmit={onSubmitLogin}>
           <input
-            type="text"
+            type="tel"
+            onKeyDown={onPhoneKeyDown}
+            onInput={onPhoneInput}
+            onPaste={onPhonePaste}
             onChange={(e) => setInputPhone(e.target.value)}
             value={inputPhone}
-            placeholder="Телефон"
+            placeholder="Телефон, пример +79001112233"
+            maxLength={'12'}
+            pattern={'^(+79)[0-9]{9}'}
             name="driver_phone_login"
             id="driver_phone_login"
             required={true}

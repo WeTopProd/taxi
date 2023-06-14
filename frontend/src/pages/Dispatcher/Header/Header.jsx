@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Header.module.scss';
 import Notice from '../Notice/Notice';
 import mainLogo from '../../../assets/img/logo-franc.png';
-import AddCar from '../AddCar/AddCar';
 import OrdersHistory from '../OrdersHistory/OrdersHistory';
 
 const Header = () => {
@@ -10,7 +9,7 @@ const Header = () => {
     <header className={styles.header}>
       <img className={styles.logo} src={mainLogo} alt={'logo'} />
       <div className={styles.btns}>
-        <AddCar />
+        {/*<AddCar />*/}
         <OrdersHistory />
         <Notice />
       </div>
