@@ -7,7 +7,7 @@ import changeMeta from '../../helpers/changeMeta';
 import { DriverProvider, useDriverContext } from './DriverContext';
 
 const PAGE_TITLE = 'Водитель - "БКФ Такси"';
-const PAGE_FAVICON = '/favicon_driver.ico';
+// const PAGE_FAVICON = '/favicon_driver.ico';
 
 function DriverContainer() {
   return (
@@ -21,7 +21,7 @@ function Driver() {
   const { driverOrders, setDriverStatus } = useDriverContext();
 
   useEffect(() => {
-    changeMeta(PAGE_TITLE, PAGE_FAVICON);
+    changeMeta(PAGE_TITLE);
   }, []);
 
   return (

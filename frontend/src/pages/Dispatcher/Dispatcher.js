@@ -7,10 +7,10 @@ import { DispatcherProvider } from './DispatcherContext';
 import CarsList from './CarsList/CarsList';
 
 const PAGE_TITLE = 'Диспетчер - "БКФ Такси"';
-const PAGE_FAVICON = '/favicon_dispatcher.ico';
+// const PAGE_FAVICON = '/favicon_dispatcher.ico';
 
 function Dispatcher() {
-  useEffect(() => changeMeta(PAGE_TITLE, PAGE_FAVICON), []);
+  useEffect(() => changeMeta(PAGE_TITLE), []);
 
   return (
     <DispatcherProvider>

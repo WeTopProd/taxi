@@ -33,10 +33,11 @@ export const useYandexMap = () => {
         'map',
         {
           center: map_center,
-          zoom: 11,
+          zoom: 12,
           controls: ['routePanelControl'],
         },
         {
+          autoFitToViewport: 'always',
           // searchControlProvider: 'yandex#search'
         },
       );

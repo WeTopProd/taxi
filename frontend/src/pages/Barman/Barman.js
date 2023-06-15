@@ -10,10 +10,10 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchOrdersByPage } from '../../services/orderService';
 
 const PAGE_TITLE = 'Бармен - "БКФ Такси"';
-const PAGE_FAVICON = '/favicon_barmen.ico';
+// const PAGE_FAVICON = '/favicon_barmen.ico';
 
 function Barman() {
-  useEffect(() => changeMeta(PAGE_TITLE, PAGE_FAVICON), []);
+  useEffect(() => changeMeta(PAGE_TITLE), []);
 
   const { data: orders = [] } = useQuery({
     queryFn: () => fetchOrdersByPage().then((res) => res.data?.results),
