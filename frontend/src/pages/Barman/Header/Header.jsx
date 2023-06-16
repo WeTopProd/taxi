@@ -5,10 +5,10 @@ import mainLogo from '../../../assets/img/logo-franc.png';
 
 const Header = () => {
   return (
-    <header className={styles.header}>
+    <div className={styles.header}>
       <img className={styles.logo} src={mainLogo} alt={'logo'} />
       <CarsFree />
-    </header>
+    </div>
   );
 };
 

@@ -28,9 +28,10 @@ function Barman() {
   return (
     <div className={styles.container_barmen}>
       <BarmanProvider>
-        <Header />
         <main className={styles.main}>
           <div className={styles.left}>
+            <Header />
+
             <div className={styles.form}>
               <Form />
             </div>

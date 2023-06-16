@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Header.module.scss';
-import CarNumber from '../../pages/Driver/CarNumber/CarNumber';
-import mainLogo from '../../assets/img/logo-franc.png';
-import { routes } from '../../helpers/routes';
+import CarNumber from '../CarNumber/CarNumber';
+import mainLogo from '../../../assets/img/logo-franc.png';
+import { routes } from '../../../helpers/routes';
 import { useNavigate } from 'react-router-dom';
-import { logoutQuery } from '../../services/authService';
-import ButtonReload from '../../pages/Driver/ButtonReload/ButtonReload';
+import { logoutQuery } from '../../../services/authService';
+import ButtonReload from '../ButtonReload/ButtonReload';
 
 const Header = ({ isAuth = false }) => {
   const navigate = useNavigate();

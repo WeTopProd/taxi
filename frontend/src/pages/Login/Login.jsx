@@ -3,7 +3,6 @@ import styles from './Login.module.scss';
 import { setToken } from '../../services/localStorageService';
 import { routes } from '../../helpers/routes';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Header/Header';
 import { loginQuery } from '../../services/authService';
 import { getUserInfoByToken } from '../../services/userService';
 import {
@@ -11,6 +10,7 @@ import {
   onPhoneKeyDown,
   onPhonePaste,
 } from '../../helpers/phoneMask';
+import Header from './Header/Header';
 
 function Login() {
   const [inputPhone, setInputPhone] = useState('');
@@ -66,7 +66,7 @@ function Login() {
 
   return (
     <div className={styles.container}>
-      <Header isAuth={false} />
+      <Header />
       <section className={styles.login_wrapper}>
         <h2>Вход в личный кабинет</h2>
         <form onSubmit={onSubmitLogin}>

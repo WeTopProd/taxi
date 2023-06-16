@@ -1,5 +1,5 @@
 import styles from './Driver.module.scss';
-import Header from '../../components/Header/Header';
+import Header from './Header/Header';
 import DriverStatus from './DriverStatus/DriverStatus';
 import DriverPopup from './DriverPopup/DriverPopup';
 import { useEffect } from 'react';

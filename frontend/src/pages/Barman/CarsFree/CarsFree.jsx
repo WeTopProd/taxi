@@ -19,13 +19,13 @@ const CarsFree = () => {
         )}></span>
 
       {carsFreeCount ? (
-        <span className={styles.cars_count}>
+        <div className={styles.cars_count}>
           {carsFreeCount} {declOfNum(carsFreeCount, CARS_DECL)}
-        </span>
+        </div>
       ) : (
-        <span className={cx(styles.cars_count, styles.cars_count__busy)}>
+        <div className={cx(styles.cars_count, styles.cars_count__busy)}>
           нет свободных машин
-        </span>
+        </div>
       )}
     </div>
   );
