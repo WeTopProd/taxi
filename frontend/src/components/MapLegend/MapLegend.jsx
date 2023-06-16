@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './MapLegend.module.scss';
 import cx from 'classnames';
 import { useBarmanContext } from '../../pages/Barman/BarmanContext';
-import { BCF_INFO } from '../Map/BCF_INFO';
+import { BCF_INFO } from '../../helpers/BCF_INFO';
 
-const zones = BCF_INFO.zonePrices;
+const zones = BCF_INFO.zone_prices;
 
 const MapLegend = () => {
   const { setPrice } = useBarmanContext();

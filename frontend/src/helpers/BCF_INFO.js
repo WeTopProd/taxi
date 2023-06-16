@@ -2,7 +2,7 @@ export const BCF_INFO = {
   map_center: [55.75829427489275, 37.83995274502565],
   map_city: 'Москва',
   map_address: 'улица Сталеваров, 14к1',
-  zonePrices: [250, 350, 500, 750, 1000],
+  zone_prices: [250, 350, 500, 750, 1000],
   POLYGONS: {
     POLYGON_ZONE1: [
       [55.770725937601355, 37.8151625617878],
